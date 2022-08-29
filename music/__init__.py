@@ -19,10 +19,18 @@ def create_some_track():
 def create_app():
     app = Flask(__name__)
 
-    @app.route('/')
-    def home():
-        some_track = create_some_track()
-        # Use Jinja to customize a predefined html page rendering the layout for showing a single track.
-        return render_template('simple_track.html', track=some_track)
+    # @app.route('/')
+    # def home():
+    #     some_track = create_some_track()
+    #     # Use Jinja to customize a predefined html page rendering the layout for showing a single track.
+    #     return render_template('simple_track.html', track=some_track)
+    #
+    # return app
+    with app.app_context():
+        from .home import routes
+        from .tracks_bp import routes
 
-    return app
+        app.register_blueprint(home.blueprint_home)
+        app.register_blueprint(tracks_bp.blueprint_track)
+
+        return app
