@@ -130,7 +130,7 @@ class TrackCSVReader:
     def read_csv_files(self):
         # key is album_id
         albums_dict: dict = self.read_albums_file_as_dict()
-        # list of tracks csv rows, not tracks objects
+        # list of track csv rows, not track objects
         track_rows: list = self.read_tracks_file()
 
         # Make sure re-initialize to empty list, so that calling this function multiple times does not create
@@ -141,7 +141,7 @@ class TrackCSVReader:
             artist = create_artist_object(track_row)
             track.artist = artist
 
-            # Extract track_genres attributes and assign genres to the tracks.
+            # Extract track_genres attributes and assign genres to the track.
             track_genres = extract_genres(track_row)
             for genre in track_genres:
                 track.add_genre(genre)
