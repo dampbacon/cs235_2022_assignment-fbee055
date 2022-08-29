@@ -299,9 +299,9 @@ class TestTrack:
         track2 = Track(2, ' Heat Waves')
         track3 = Track(3, ' Tarot ')
 
-        assert str(track1) == '<Track As it Was, track id = 1>'
-        assert str(track2) == '<Track Heat Waves, track id = 2>'
-        assert str(track3) == '<Track Tarot, track id = 3>'
+        assert str(track1) == '<Track As it Was, tracks id = 1>'
+        assert str(track2) == '<Track Heat Waves, tracks id = 2>'
+        assert str(track3) == '<Track Tarot, tracks id = 3>'
 
         # Test if id of wrong type raises error
         with pytest.raises(ValueError):
@@ -330,7 +330,7 @@ class TestTrack:
         track1.track_url = ' https://spotify/track/1 '
         assert track1.track_url == 'https://spotify/track/1'
 
-        # Test track duration
+        # Test tracks duration
         track1.track_duration = 300
         assert track1.track_duration == 300
 
@@ -454,7 +454,7 @@ class TestReview:
         assert review1.rating == 3
         assert review2.review_text == 'Another review'
 
-        review2 = Review('Invalid track', 23, 1)
+        review2 = Review('Invalid tracks', 23, 1)
         assert review2.track is None
         assert review2.review_text == 'N/A'
 
@@ -703,7 +703,7 @@ class TestCSVReader:
         assert len(sorted_tracks) == 2000
 
         sorted_tracks_str = str(sorted_tracks[:3])
-        assert sorted_tracks_str == '[<Track Food, track id = 2>, <Track Electric Ave, track id = 3>, <Track This World, track id = 5>]'
+        assert sorted_tracks_str == '[<Track Food, tracks id = 2>, <Track Electric Ave, tracks id = 3>, <Track This World, tracks id = 5>]'
 
         # Test all tracks have artists
         tracks_no_artists = list(
