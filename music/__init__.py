@@ -2,14 +2,6 @@
 
 from flask import Flask, render_template
 
-# TODO: Access to the tracks should be implemented via the repository pattern and using blueprints, so this can not
-#  stay here!
-
-
-# TODO: Access to the tracks should be implemented via the repository pattern and using blueprints, so this can not
-#  stay here!
-
-
 def create_app():
     app = Flask(__name__)
 
