@@ -38,4 +38,6 @@ def sort_by_album_button(track_id=None):
 @blueprint_track.route('/track/<int:track_id>/sort_by_track_name', methods=['get'])
 def sort_by_track_name_button(track_id=None):
     sort_by_track_name(False)
+    a = create_bookmarks()
+    print('_______________________________________________ BOOKMARKS', a)
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id))

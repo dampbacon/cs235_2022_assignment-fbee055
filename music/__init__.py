@@ -2,6 +2,9 @@
 
 from flask import Flask, render_template
 
+from music.login_bp import login_bp
+
+
 def create_app():
     app = Flask(__name__)
 
@@ -18,5 +21,5 @@ def create_app():
 
         app.register_blueprint(home.blueprint_home)
         app.register_blueprint(tracks_bp.blueprint_track)
-
+        app.register_blueprint(login_bp.blueprint_login)
         return app

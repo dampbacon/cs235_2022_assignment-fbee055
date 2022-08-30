@@ -18,7 +18,6 @@ reader_obj = TrackCSVReader('tests/data/raw_albums_excerpt.csv', 'tests/data/raw
 reader_obj.read_csv_files()
 tracks = reader_obj.dataset_of_tracks
 
-
 def create_some_track():
     some_track = Track(1, "Heat Wavesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas")
     some_track.track_duration = 250
@@ -47,22 +46,22 @@ def get_next_and_previous_track(current_track):
 
 @dispatch(bool)
 def sort_by_track_name(sort_order_bool=True):
-    tracks.sort(key=lambda i: i.title if i.title else '', reverse=sort_order_bool)
+    tracks.sort(key=lambda i: i.title.upper() if i.title else '', reverse=sort_order_bool)
 
 
 @dispatch(list, bool)
 def sort_by_track_name(tracks_list=tracks, sort_order_bool=True):
-    tracks_list.sort(key=lambda i: i.title if i.title else '', reverse=sort_order_bool)
+    tracks_list.sort(key=lambda i: i.title.upper() if i.title else '', reverse=sort_order_bool)
 
 
 @dispatch(bool)
 def sort_by_album_name(sort_order_bool=True):
-    tracks.sort(key=lambda i: i.album.title if i.album else '', reverse=sort_order_bool)
+    tracks.sort(key=lambda i: i.album.title.upper() if i.album else '', reverse=sort_order_bool)
 
 
 @dispatch(list, bool)
 def sort_by_album_name(tracks_list=tracks, sort_order_bool=True):
-    tracks_list.sort(key=lambda i: i.album.title if i.album else '', reverse=sort_order_bool)
+    tracks_list.sort(key=lambda i: i.album.title.upper() if i.album else '', reverse=sort_order_bool)
 
 
 def sort_by_track_id():
@@ -79,3 +78,17 @@ def get_last_track():
 
 def get_track_data():
     pass
+
+
+def create_bookmarks(by_track_name=0):
+    bookmarks = dict()
+    if by_track_name == 0:
+        for i in range(len(tracks)):
+            if tracks[i].title is None and 'unnamed' not in bookmarks:
+                bookmarks['unnamed'] = tracks[i].track_id
+            else:
+                if tracks[i].title[0] not in bookmarks:
+                    bookmarks[tracks[i].title[0]] = tracks[i].track_id
+                else:
+                    pass
+    return bookmarks
