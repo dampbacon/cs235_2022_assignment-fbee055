@@ -13,12 +13,11 @@
     {% if track.album.title!=None %}
         <p>Track album: {{ track.album.title }}</p>
     {% endif %}
-{#    <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>#}
-{#    <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>#}
+
     {% if track!=first and track!=last%}
-            <h1>middle elements</h1>
-            <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>
-            <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>
+        <h1>middle elements</h1>
+        <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>
+        <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>
 
     {% endif %}
 
