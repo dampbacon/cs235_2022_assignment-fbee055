@@ -18,23 +18,26 @@ def create_some_track():
 def find_track(track_id):
     for i in tracks:
         if i.track_id == track_id:
-            return i
+            return i, tracks.index(i)
 
 
-def get_next_track():
-    pass
-
-
-def get_previous_track():
-    pass
+def get_next_and_previous_track(current_track):
+    temp_list = [0, 0]
+    if current_track[0] != tracks[-1]:
+        print("WHAT IS WRONG. TRACK PREVIOUS", tracks[current_track[1] - 1])
+        temp_list[0] = tracks[current_track[1] - 1]
+    if current_track[0] != tracks[0]:
+        print("WHAT IS WRONG. TRACK PREVIOUS", tracks[current_track[1] + 1])
+        temp_list[1] = tracks[current_track[1] + 1]
+    return tuple(temp_list)
 
 
 def get_first_track():
-    pass
+    return tracks[0]
 
 
 def get_last_track():
-    pass
+    return tracks[-1]
 
 
 def get_track_data():
