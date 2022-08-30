@@ -20,7 +20,7 @@ def display_track_at_id(track_id=None):
     track_data = find_track(track_id)
     print("track data:", track_data[0])
     np_url_id_tuple = get_next_and_previous_track(track_data)
-    print(tracks)
-    print(np_url_id_tuple, '   prev=', np_url_id_tuple[0].track_id, '    next=', np_url_id_tuple[1].track_id)
+    print('NP_URL_TUPLE_________: ',np_url_id_tuple)
 
-    return render_template('display_track.html', track=track_data[0], np_tuple=np_url_id_tuple)
+    return render_template('display_track.html', track=track_data[0], np_tuple=np_url_id_tuple, first=get_first_track(),
+                           last=get_last_track())

@@ -10,9 +10,26 @@
     <p>Track id {{ track.track_id }}</p>
     <p>Track Duration: <b>{{ track.track_duration }}</b> seconds</p>
     <p>Track URL: {{ track.track_url }}</p>
-    <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>
-    <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>
+{#    <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>#}
+{#    <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>#}
+    {% if track!=first and track!=last%}
+            <h1>middle elements</h1>
+            <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>
+            <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>
+
+     {% endif %}
 
 
+    {% if track==first %}
+        <h1>first element</h1>
+        <p>Track Prev: <a href="/track/{{ track.track_id }}">Prev={{ track.track_id }}</a> </p>
+        <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>
+    {% endif %}
+
+    {% if track==last %}
+        <h1>Last element</h1>
+        <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>
+        <p>Track Next: <a href="/track/{{ track.track_id }}">Next={{ track.track_id }}</a> </p>
+    {% endif %}
 </body>
 </html>

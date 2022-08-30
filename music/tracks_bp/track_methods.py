@@ -21,14 +21,27 @@ def find_track(track_id):
             return i, tracks.index(i)
 
 
+# def get_next_and_previous_track(current_track):
+#     temp_list = [0, 0]
+#     if current_track[0] != get_last_track():
+#         print("WHAT IS WRONG. TRACK PREVIOUS", tracks[current_track[1] - 1])
+#         temp_list[0] = tracks[current_track[1] - 1]
+#     if current_track[0] != get_first_track():
+#         print("WHAT IS WRONG. TRACK PREVIOUS", tracks[current_track[1] + 1])
+#         temp_list[1] = tracks[current_track[1] + 1]
+#     return tuple(temp_list)
+
+
 def get_next_and_previous_track(current_track):
     temp_list = [0, 0]
-    if current_track[0] != tracks[-1]:
+    if current_track[0] == get_last_track():
         print("WHAT IS WRONG. TRACK PREVIOUS", tracks[current_track[1] - 1])
         temp_list[0] = tracks[current_track[1] - 1]
-    if current_track[0] != tracks[0]:
+    elif current_track[0] == get_first_track():
         print("WHAT IS WRONG. TRACK PREVIOUS", tracks[current_track[1] + 1])
         temp_list[1] = tracks[current_track[1] + 1]
+    elif current_track[0] != get_last_track() and current_track[0] != get_first_track():
+        temp_list = [tracks[current_track[1] - 1], tracks[current_track[1] + 1]]
     return tuple(temp_list)
 
 
