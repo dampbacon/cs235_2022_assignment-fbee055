@@ -34,5 +34,7 @@
         <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>
         <p>Track Next: <a href="/track/{{ track.track_id }}">Next={{ track.track_id }}</a> </p>
     {% endif %}
+
+    <p>Sort by album: <a href="/track/{{ track.track_id }}/sort_by_album"> click here </a></p>
 </body>
 </html>

@@ -3,6 +3,11 @@
 from music.domainmodel.track import Track
 from music.adapters.csvdatareader import TrackCSVReader
 
+#
+# INITIALIZE a csv reader object and make it read tracks. This is needed to find the tracks needed to display them
+#
+#
+#
 # test code
 # reader_obj = TrackCSVReader('tests/data/raw_albums_test.csv', 'tests/data/raw_tracks_test.csv')
 
