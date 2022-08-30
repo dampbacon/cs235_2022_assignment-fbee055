@@ -3,7 +3,12 @@
 from music.domainmodel.track import Track
 from music.adapters.csvdatareader import TrackCSVReader
 
-reader_obj = TrackCSVReader('tests/data/raw_albums_test.csv', 'tests/data/raw_tracks_test.csv')
+# test code
+# reader_obj = TrackCSVReader('tests/data/raw_albums_test.csv', 'tests/data/raw_tracks_test.csv')
+
+# real deal code
+reader_obj = TrackCSVReader('tests/data/raw_albums_excerpt.csv', 'tests/data/raw_tracks_excerpt.csv')
+
 reader_obj.read_csv_files()
 tracks = reader_obj.dataset_of_tracks
 
@@ -21,17 +26,6 @@ def find_track(track_id):
             return i, tracks.index(i)
 
 
-# def get_next_and_previous_track(current_track):
-#     temp_list = [0, 0]
-#     if current_track[0] != get_last_track():
-#         print("WHAT IS WRONG. TRACK PREVIOUS", tracks[current_track[1] - 1])
-#         temp_list[0] = tracks[current_track[1] - 1]
-#     if current_track[0] != get_first_track():
-#         print("WHAT IS WRONG. TRACK PREVIOUS", tracks[current_track[1] + 1])
-#         temp_list[1] = tracks[current_track[1] + 1]
-#     return tuple(temp_list)
-
-
 def get_next_and_previous_track(current_track):
     temp_list = [0, 0]
     if current_track[0] == get_last_track():
@@ -43,6 +37,22 @@ def get_next_and_previous_track(current_track):
     elif current_track[0] != get_last_track() and current_track[0] != get_first_track():
         temp_list = [tracks[current_track[1] - 1], tracks[current_track[1] + 1]]
     return tuple(temp_list)
+
+
+def sort_by_track_name():
+    pass
+
+
+def sort_by_album_name(sort_order_bool=True):
+    tracks.sort(key=lambda i: i.album.title if i.album else '', reverse=sort_order_bool)
+
+
+def sort_by_album_name(tracks_list=tracks, sort_order_bool=True):
+    tracks_list.sort(key=lambda i: i.album.title if i.album else '', reverse=sort_order_bool)
+
+
+def sort_by_track_id():
+    tracks.sort()
 
 
 def get_first_track():

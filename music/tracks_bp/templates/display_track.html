@@ -10,6 +10,9 @@
     <p>Track id {{ track.track_id }}</p>
     <p>Track Duration: <b>{{ track.track_duration }}</b> seconds</p>
     <p>Track URL: {{ track.track_url }}</p>
+    {% if track.album.title!=None %}
+        <p>Track album: {{ track.album.title }}</p>
+    {% endif %}
 {#    <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>#}
 {#    <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>#}
     {% if track!=first and track!=last%}
@@ -17,7 +20,7 @@
             <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>
             <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>
 
-     {% endif %}
+    {% endif %}
 
 
     {% if track==first %}
