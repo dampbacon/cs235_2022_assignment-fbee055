@@ -2,6 +2,7 @@
 #
 from music.domainmodel.track import Track
 from music.adapters.csvdatareader import TrackCSVReader
+from multipledispatch import dispatch
 
 #
 # INITIALIZE a csv reader object and make it read tracks. This is needed to find the tracks needed to display them
@@ -10,7 +11,7 @@ from music.adapters.csvdatareader import TrackCSVReader
 #
 # test code
 # reader_obj = TrackCSVReader('tests/data/raw_albums_test.csv', 'tests/data/raw_tracks_test.csv')
-
+#
 # real deal code
 reader_obj = TrackCSVReader('tests/data/raw_albums_excerpt.csv', 'tests/data/raw_tracks_excerpt.csv')
 
@@ -44,14 +45,22 @@ def get_next_and_previous_track(current_track):
     return tuple(temp_list)
 
 
-def sort_by_track_name():
-    pass
+@dispatch(bool)
+def sort_by_track_name(sort_order_bool=True):
+    tracks.sort(key=lambda i: i.title if i.title else '', reverse=sort_order_bool)
 
 
+@dispatch(list, bool)
+def sort_by_track_name(tracks_list=tracks, sort_order_bool=True):
+    tracks_list.sort(key=lambda i: i.title if i.title else '', reverse=sort_order_bool)
+
+
+@dispatch(bool)
 def sort_by_album_name(sort_order_bool=True):
     tracks.sort(key=lambda i: i.album.title if i.album else '', reverse=sort_order_bool)
 
 
+@dispatch(list, bool)
 def sort_by_album_name(tracks_list=tracks, sort_order_bool=True):
     tracks_list.sort(key=lambda i: i.album.title if i.album else '', reverse=sort_order_bool)
 

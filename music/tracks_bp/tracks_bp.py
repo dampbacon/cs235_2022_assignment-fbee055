@@ -18,7 +18,7 @@ def display_track():
 @blueprint_track.route('/track/<int:track_id>', methods=['get'])
 def display_track_at_id(track_id=None):
     track_data = find_track(track_id)
-
+    # sort_by_track_name()
     # works should be moved later
     # sort_by_album_name()
 
@@ -31,5 +31,11 @@ def display_track_at_id(track_id=None):
 
 @blueprint_track.route('/track/<int:track_id>/sort_by_album', methods=['get'])
 def sort_by_album_button(track_id=None):
-    sort_by_album_name()
+    sort_by_album_name(False)
+    return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id))
+
+
+@blueprint_track.route('/track/<int:track_id>/sort_by_track_name', methods=['get'])
+def sort_by_track_name_button(track_id=None):
+    sort_by_track_name(False)
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id))
