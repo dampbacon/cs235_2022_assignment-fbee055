@@ -29,8 +29,8 @@ class csvreader_track_methods_extension:
         self.__tracks = reader_obj.dataset_of_tracks
 
         # sbt = sort by track etc. for the rest
-        self.__tracks_sbt = None
-        self.__tracks_sba = None
+        self.__tracks_sbt = self.sort_by_track_name(self.__tracks, False)
+        self.__tracks_sba = self.sort_by_album_name(self.__tracks, False)
 
     @property
     def tracks(self):
@@ -70,12 +70,12 @@ class csvreader_track_methods_extension:
         # temp code
         if tracks_list is None:
             tracks_list = self.tracks
-        tracks_list.sort(key=lambda i: i.title.upper() if i.title else '', reverse=sort_order_bool)
+        return sorted(tracks_list, key=lambda i: i.title.upper() if i.title else '', reverse=sort_order_bool)
 
     def sort_by_album_name(self, tracks_list=None, sort_order_bool=True):
         if tracks_list is None:
             tracks_list = self.tracks
-        tracks_list.sort(key=lambda i: i.album.title.upper() if i.album else '', reverse=sort_order_bool)
+        return sorted(tracks_list, key=lambda i: i.album.title.upper() if i.album else '', reverse=sort_order_bool)
 
     def sort_by_track_id(self, tracks_list=None):
         if tracks_list is None:

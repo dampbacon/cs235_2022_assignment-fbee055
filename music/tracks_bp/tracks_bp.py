@@ -27,19 +27,20 @@ def display_track_at_id(track_id=None):
     query_params = ''
     args = request.args
     list_from_query = tracks
-    bookmarks=None
+    bookmarks = None
     if 'order' in args:
         print("ORDER____________________________________________________________", args, 'order' in args, args['order'])
         if args['order'] in ['tracks', 'albums']:
             query_params = '?order=' + args['order']
             if args['order'] == 'albums':
-                list_from_query = tracks
+                # list_from_query = tracks
+                list_from_query = track_methods.tracks_a
                 bookmarks = track_methods.create_bookmarks(list_from_query, 1)
-                # list_from_query = track_methods.tracks_a
+
             elif args['order'] == 'tracks':
-                list_from_query = tracks
+                # list_from_query = tracks
+                list_from_query = track_methods.tracks_t
                 bookmarks = track_methods.create_bookmarks(list_from_query, 0)
-                # list_from_query = track_methods.tracks_t
 
     track_data = track_methods.find_track(None, track_id)
     print("track data:", track_data[0])
@@ -53,11 +54,11 @@ def display_track_at_id(track_id=None):
 
 @blueprint_track.route('/track/<int:track_id>/sort_by_album', methods=['get'])
 def sort_by_album_button(track_id=None):
-    track_methods.sort_by_album_name(None, False)
+    # track_methods.sort_by_album_name(None, False)
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=albums')
 
 
 @blueprint_track.route('/track/<int:track_id>/sort_by_track_name', methods=['get'])
 def sort_by_track_name_button(track_id=None):
-    track_methods.sort_by_track_name(None, False)
+    # track_methods.sort_by_track_name(None, False)
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=tracks')
