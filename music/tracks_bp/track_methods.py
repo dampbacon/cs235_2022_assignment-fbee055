@@ -36,6 +36,14 @@ class csvreader_track_methods_extension:
     def tracks(self):
         return self.__tracks
 
+    @property
+    def tracks_a(self):
+        return self.__tracks_sba
+
+    @property
+    def tracks_t(self):
+        return self.__tracks_sbt
+
     def find_track(self, tracks_list, track_id):
         if tracks_list is None:
             tracks_list = self.tracks
@@ -84,7 +92,6 @@ class csvreader_track_methods_extension:
             tracks_list = self.tracks
         return tracks_list[-1]
 
-    # list type zero raw data
     def get_track_data(self, list_type=0):
         if list_type == 0:
             return self.tracks
@@ -104,6 +111,10 @@ class csvreader_track_methods_extension:
                         bookmarks[tracks_list[i].title[0].upper()] = tracks_list[i].track_id
                     else:
                         pass
+        elif by_track_name == 1:
+            pass
+        elif by_track_name == 2:
+            pass
         try:
             return bookmarks.items()
         except AttributeError:
