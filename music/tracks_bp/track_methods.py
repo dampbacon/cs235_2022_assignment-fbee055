@@ -112,6 +112,20 @@ class csvreader_track_methods_extension:
                     else:
                         pass
         elif by_track_name == 1:
+            bookmarks = dict()
+            for i in range(len(tracks_list)):
+                if tracks_list[i].album:
+                    if tracks_list[i].album.title is None and 'No album' not in bookmarks:
+                        bookmarks['No album'] = tracks_list[i].track_id
+                    else:
+                        if tracks_list[i].album.title[0].upper() not in bookmarks:
+                            bookmarks[tracks_list[i].album.title[0].upper()] = tracks_list[i].track_id
+                        else:
+                            pass
+                else:
+                    if 'No album' not in bookmarks:
+                        bookmarks['No album'] = tracks_list[i].track_id
+
             pass
         elif by_track_name == 2:
             pass

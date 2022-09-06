@@ -34,6 +34,7 @@ def display_track_at_id(track_id=None):
             query_params = '?order=' + args['order']
             if args['order'] == 'albums':
                 list_from_query = tracks
+                bookmarks = track_methods.create_bookmarks(list_from_query, 1)
                 # list_from_query = track_methods.tracks_a
             elif args['order'] == 'tracks':
                 list_from_query = tracks
