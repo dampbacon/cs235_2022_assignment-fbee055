@@ -21,24 +21,33 @@ def display_track():
 
 @blueprint_track.route('/track/<int:track_id>', methods=['get'])
 def display_track_at_id(track_id=None):
-    track_data = track_methods.find_track(None, track_id)
     # sort_by_track_name()
     # works should be moved later
     # sort_by_album_name()
     query_params = ''
     args = request.args
+    list_from_query = tracks
+    bookmarks=None
     if 'order' in args:
         print("ORDER____________________________________________________________", args, 'order' in args, args['order'])
         if args['order'] in ['tracks', 'albums']:
-            query_params = '?order='+args['order']
+            query_params = '?order=' + args['order']
+            if args['order'] == 'albums':
+                list_from_query = tracks
+                # list_from_query = track_methods.tracks_a
+            elif args['order'] == 'tracks':
+                list_from_query = tracks
+                bookmarks = track_methods.create_bookmarks(list_from_query, 0)
+                # list_from_query = track_methods.tracks_t
 
+    track_data = track_methods.find_track(None, track_id)
     print("track data:", track_data[0])
-    np_url_id_tuple = track_methods.get_next_and_previous_track(tracks, track_data)
+    np_url_id_tuple = track_methods.get_next_and_previous_track(list_from_query, track_data)
     print('NP_URL_TUPLE_________: ', np_url_id_tuple)
     return render_template('display_track.html', track=track_data[0], np_tuple=np_url_id_tuple,
                            first=track_methods.get_first_track(),
                            last=track_methods.get_last_track(),
-                           bookmarks=track_methods.create_bookmarks(tracks, 0), query_params=query_params)
+                           bookmarks=bookmarks, query_params=query_params)
 
 
 @blueprint_track.route('/track/<int:track_id>/sort_by_album', methods=['get'])
@@ -50,6 +59,4 @@ def sort_by_album_button(track_id=None):
 @blueprint_track.route('/track/<int:track_id>/sort_by_track_name', methods=['get'])
 def sort_by_track_name_button(track_id=None):
     track_methods.sort_by_track_name(None, False)
-    a = track_methods.create_bookmarks(tracks, 0)
-    print('_______________________________________________ BOOKMARKS', a)
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=tracks')
