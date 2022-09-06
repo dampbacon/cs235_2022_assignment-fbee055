@@ -36,21 +36,26 @@ class csvreader_track_methods_extension:
     def tracks(self):
         return self.__tracks
 
-    def find_track(self, track_id):
-        for i in self.tracks:
+    def find_track(self, tracks_list, track_id):
+        if tracks_list is None:
+            tracks_list = self.tracks
+        for i in tracks_list:
             if i.track_id == track_id:
-                return i, self.tracks.index(i)
+                return i, tracks_list.index(i)
 
-    def get_next_and_previous_track(self, current_track):
+    def get_next_and_previous_track(self, tracks_list, current_track):
+        if tracks_list is None:
+            tracks_list = tracks_list
         temp_list = [0, 0]
-        if current_track[0] == self.get_last_track():
-            print("WHAT IS WRONG. TRACK PREVIOUS", self.tracks[current_track[1] - 1])
-            temp_list[0] = self.tracks[current_track[1] - 1]
-        elif current_track[0] == self.get_first_track():
-            print("WHAT IS WRONG. TRACK PREVIOUS", self.tracks[current_track[1] + 1])
-            temp_list[1] = self.tracks[current_track[1] + 1]
-        elif current_track[0] != self.get_last_track() and current_track[0] != self.get_first_track():
-            temp_list = [self.tracks[current_track[1] - 1], self.tracks[current_track[1] + 1]]
+        if current_track[0] == self.get_last_track(tracks_list):
+            print("WHAT IS WRONG. TRACK PREVIOUS", tracks_list[current_track[1] - 1])
+            temp_list[0] = tracks_list[current_track[1] - 1]
+        elif current_track[0] == self.get_first_track(tracks_list):
+            print("WHAT IS WRONG. TRACK PREVIOUS", tracks_list[current_track[1] + 1])
+            temp_list[1] = tracks_list[current_track[1] + 1]
+        elif current_track[0] != self.get_last_track(tracks_list) \
+                and current_track[0] != self.get_first_track(tracks_list):
+            temp_list = [tracks_list[current_track[1] - 1], tracks_list[current_track[1] + 1]]
         return tuple(temp_list)
 
     def sort_by_track_name(self, tracks_list, sort_order_bool=True):
@@ -84,18 +89,19 @@ class csvreader_track_methods_extension:
         if list_type == 0:
             return self.tracks
 
-    @dispatch(int)
-    def create_bookmarks(self, by_track_name):
+    def create_bookmarks(self, tracks_list, by_track_name):
+        if tracks_list is None:
+            tracks_list = self.tracks
         bookmarks = None
         # the bookmarks are to allow browsing at a bookmark via link, 0= track name 1= album name 2= artist name??
         if by_track_name == 0:
             bookmarks = dict()
-            for i in range(len(self.tracks)):
-                if self.tracks[i].title is None and 'unnamed' not in bookmarks:
-                    bookmarks['unnamed'] = self.tracks[i].track_id
+            for i in range(len(tracks_list)):
+                if tracks_list[i].title is None and 'unnamed' not in bookmarks:
+                    bookmarks['unnamed'] = tracks_list[i].track_id
                 else:
-                    if self.tracks[i].title[0].upper() not in bookmarks:
-                        bookmarks[self.tracks[i].title[0].upper()] = self.tracks[i].track_id
+                    if tracks_list[i].title[0].upper() not in bookmarks:
+                        bookmarks[tracks_list[i].title[0].upper()] = tracks_list[i].track_id
                     else:
                         pass
         try:

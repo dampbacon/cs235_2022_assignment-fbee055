@@ -40,7 +40,7 @@
 
     {% if bookmarks %} <p><b><u>Bookmarks:</u></b></p>
     {% for i in bookmarks %}
-        <a href="/track/{{ i[1] }}">{{ i[0] }}</a>
+        <a href="/track/{{ i[1] }}{{ query_params }}">{{ i[0] }}</a>
     {% endfor %}
     {% endif %}
 

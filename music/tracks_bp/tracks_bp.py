@@ -21,7 +21,7 @@ def display_track():
 
 @blueprint_track.route('/track/<int:track_id>', methods=['get'])
 def display_track_at_id(track_id=None):
-    track_data = track_methods.find_track(track_id)
+    track_data = track_methods.find_track(None, track_id)
     # sort_by_track_name()
     # works should be moved later
     # sort_by_album_name()
@@ -33,12 +33,12 @@ def display_track_at_id(track_id=None):
             query_params = '?order='+args['order']
 
     print("track data:", track_data[0])
-    np_url_id_tuple = track_methods.get_next_and_previous_track(track_data)
+    np_url_id_tuple = track_methods.get_next_and_previous_track(tracks, track_data)
     print('NP_URL_TUPLE_________: ', np_url_id_tuple)
     return render_template('display_track.html', track=track_data[0], np_tuple=np_url_id_tuple,
                            first=track_methods.get_first_track(),
                            last=track_methods.get_last_track(),
-                           bookmarks=track_methods.create_bookmarks(0), query_params=query_params)
+                           bookmarks=track_methods.create_bookmarks(tracks, 0), query_params=query_params)
 
 
 @blueprint_track.route('/track/<int:track_id>/sort_by_album', methods=['get'])
@@ -50,6 +50,6 @@ def sort_by_album_button(track_id=None):
 @blueprint_track.route('/track/<int:track_id>/sort_by_track_name', methods=['get'])
 def sort_by_track_name_button(track_id=None):
     track_methods.sort_by_track_name(None, False)
-    a = track_methods.create_bookmarks(0)
+    a = track_methods.create_bookmarks(tracks, 0)
     print('_______________________________________________ BOOKMARKS', a)
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=tracks')
