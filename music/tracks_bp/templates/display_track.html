@@ -37,6 +37,12 @@
     <p>Go to last: <a href="/track/{{ last.track_id }}">here={{ last.track_id }}</a></p>
     <p>Sort by album: <a href="/track/{{ track.track_id }}/sort_by_album"> click here </a></p>
     <p>Sort by track name: <a href="/track/{{ track.track_id }}/sort_by_track_name"> click here </a></p>
+    <p><b><u>Bookmarks:</u></b></p>
+    {% if bookmarks %}
+    {% for i in bookmarks %}
+        <a href="/track/{{ i[1] }}">{{ i[0] }}</a>
+    {% endfor %}
+    {% endif %}
 
 </body>
 </html>

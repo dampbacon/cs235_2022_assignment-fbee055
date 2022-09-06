@@ -15,8 +15,9 @@
 
 
 ## ideas
-* for each user session initiate a copy of the list from the reader, the current implementation has the
-following issue that any user sorting the data sorts the data for everyone.
+* for each connection initiate a copy of the list from the reader, the current implementation has the
+following issue that any user sorting the data sorts the data for everyone. This can be solved by generating sorted copy
+lists by repurposing the sort functions converting .sort() to .sorted() and updating the relevant code.
 * implement the js api https://datatables.net/ for very clean beautiful searchable, pageable, sortable tables. 
 A great tutorial exists of using it with flask https://www.youtube.com/watch?v=IsuhCAptNbg
 

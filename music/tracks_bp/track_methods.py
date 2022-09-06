@@ -1,4 +1,4 @@
-# This file is gonna hold the methods needed for finding next and previous track required for browsing to work
+# todo make this an object with attributes containing varius sorted lists and convert the methods to sort to sorted
 #
 from music.domainmodel.track import Track
 from music.adapters.csvdatareader import TrackCSVReader
@@ -82,13 +82,14 @@ def get_track_data():
 
 def create_bookmarks(by_track_name=0):
     bookmarks = dict()
+    # the bookmarks are to allow browsing at a bookmark via link, 0= track name 1= album name 2= artist name??
     if by_track_name == 0:
         for i in range(len(tracks)):
             if tracks[i].title is None and 'unnamed' not in bookmarks:
                 bookmarks['unnamed'] = tracks[i].track_id
             else:
-                if tracks[i].title[0] not in bookmarks:
-                    bookmarks[tracks[i].title[0]] = tracks[i].track_id
+                if tracks[i].title[0].upper() not in bookmarks:
+                    bookmarks[tracks[i].title[0].upper()] = tracks[i].track_id
                 else:
                     pass
-    return bookmarks
+    return bookmarks.items()
