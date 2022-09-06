@@ -42,7 +42,7 @@ def display_track_at_id(track_id=None):
                 list_from_query = track_methods.tracks_t
                 bookmarks = track_methods.create_bookmarks(list_from_query, 0)
 
-    track_data = track_methods.find_track(None, track_id)
+    track_data = track_methods.find_track(list_from_query, track_id)
     print("track data:", track_data[0])
     np_url_id_tuple = track_methods.get_next_and_previous_track(list_from_query, track_data)
     print('NP_URL_TUPLE_________: ', np_url_id_tuple)
