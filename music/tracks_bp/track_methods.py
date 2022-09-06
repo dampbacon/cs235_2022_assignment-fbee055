@@ -26,7 +26,11 @@ class csvreader_track_methods_extension:
         reader_obj = TrackCSVReader('tests/data/raw_albums_excerpt.csv', 'tests/data/raw_tracks_excerpt.csv')
 
         reader_obj.read_csv_files()
-        self.tracks = reader_obj.dataset_of_tracks
+        self.__tracks = reader_obj.dataset_of_tracks
+
+    @property
+    def tracks(self):
+        return self.__tracks
 
     def find_track(self, track_id):
         for i in self.tracks:
@@ -45,38 +49,36 @@ class csvreader_track_methods_extension:
             temp_list = [self.tracks[current_track[1] - 1], self.tracks[current_track[1] + 1]]
         return tuple(temp_list)
 
-    @dispatch(bool)
-    def sort_by_track_name(self, sort_order_bool=True):
-        self.tracks.sort(key=lambda i: i.title.upper() if i.title else '', reverse=sort_order_bool)
-
-    @dispatch(list, bool)
     def sort_by_track_name(self, tracks_list, sort_order_bool=True):
         # temp code
-        tracks_list = self.tracks
-
+        if tracks_list is None:
+            tracks_list = self.tracks
         tracks_list.sort(key=lambda i: i.title.upper() if i.title else '', reverse=sort_order_bool)
 
-    @dispatch(bool)
-    def sort_by_album_name(self, sort_order_bool=True):
-        self.tracks.sort(key=lambda i: i.album.title.upper() if i.album else '', reverse=sort_order_bool)
-
-    @dispatch(list, bool)
-    def sort_by_album_name(self, tracks_list, sort_order_bool=True):
-        tracks_list = self.tracks
+    def sort_by_album_name(self, tracks_list=None, sort_order_bool=True):
+        if tracks_list is None:
+            tracks_list = self.tracks
         tracks_list.sort(key=lambda i: i.album.title.upper() if i.album else '', reverse=sort_order_bool)
 
-    def sort_by_track_id(self):
-        self.tracks.sort()
+    def sort_by_track_id(self, tracks_list=None):
+        if tracks_list is None:
+            tracks_list = self.tracks
+        tracks_list.sort()
 
-    def get_first_track(self):
-        return self.tracks[0]
+    def get_first_track(self, tracks_list=None):
+        if tracks_list is None:
+            tracks_list = self.tracks
+        return tracks_list[0]
 
-    def get_last_track(self):
-        return self.tracks[-1]
+    def get_last_track(self, tracks_list=None):
+        if tracks_list is None:
+            tracks_list = self.tracks
+        return tracks_list[-1]
 
     # list type zero raw data
     def get_track_data(self, list_type=0):
-        return self.tracks
+        if list_type == 0:
+            return self.tracks
 
     @dispatch(int)
     def create_bookmarks(self, by_track_name):

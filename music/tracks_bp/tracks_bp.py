@@ -34,13 +34,13 @@ def display_track_at_id(track_id=None):
 
 @blueprint_track.route('/track/<int:track_id>/sort_by_album', methods=['get'])
 def sort_by_album_button(track_id=None):
-    track_methods.sort_by_album_name(False)
+    track_methods.sort_by_album_name(None, False)
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id))
 
 
 @blueprint_track.route('/track/<int:track_id>/sort_by_track_name', methods=['get'])
 def sort_by_track_name_button(track_id=None):
-    track_methods.sort_by_track_name(False)
+    track_methods.sort_by_track_name(None, False)
     a = track_methods.create_bookmarks(0)
     print('_______________________________________________ BOOKMARKS', a)
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id))
