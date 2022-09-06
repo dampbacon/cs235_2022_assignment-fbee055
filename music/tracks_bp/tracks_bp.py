@@ -47,8 +47,8 @@ def display_track_at_id(track_id=None):
     np_url_id_tuple = track_methods.get_next_and_previous_track(list_from_query, track_data)
     print('NP_URL_TUPLE_________: ', np_url_id_tuple)
     return render_template('display_track.html', track=track_data[0], np_tuple=np_url_id_tuple,
-                           first=track_methods.get_first_track(),
-                           last=track_methods.get_last_track(),
+                           first=track_methods.get_first_track(list_from_query),
+                           last=track_methods.get_last_track(list_from_query),
                            bookmarks=bookmarks, query_params=query_params)
 
 
