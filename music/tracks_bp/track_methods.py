@@ -28,6 +28,10 @@ class csvreader_track_methods_extension:
         reader_obj.read_csv_files()
         self.__tracks = reader_obj.dataset_of_tracks
 
+        # sbt = sort by track etc. for the rest
+        self.__tracks_sbt = None
+        self.__tracks_sba = None
+
     @property
     def tracks(self):
         return self.__tracks

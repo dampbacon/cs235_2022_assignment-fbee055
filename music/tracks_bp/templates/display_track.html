@@ -16,25 +16,25 @@
 
     {% if track!=first and track!=last%}
         <h1>middle elements</h1>
-        <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>
-        <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>
+        <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}{{ query_params }}">Prev={{ np_tuple[0].track_id }}</a> </p>
+        <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}{{ query_params }}">Next={{ np_tuple[1].track_id }}</a> </p>
 
     {% endif %}
 
 
     {% if track==first %}
         <h1>first element</h1>
-        <p>Track Prev: <a href="/track/{{ track.track_id }}">Prev={{ track.track_id }}</a> </p>
-        <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}">Next={{ np_tuple[1].track_id }}</a> </p>
+        <p>Track Prev: <a href="/track/{{ track.track_id }}{{ query_params }}">Prev={{ track.track_id }}</a> </p>
+        <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}{{ query_params }}">Next={{ np_tuple[1].track_id }}</a> </p>
     {% endif %}
 
     {% if track==last %}
         <h1>Last element</h1>
-        <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}">Prev={{ np_tuple[0].track_id }}</a> </p>
-        <p>Track Next: <a href="/track/{{ track.track_id }}">Next={{ track.track_id }}</a> </p>
+        <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}{{ query_params }}">Prev={{ np_tuple[0].track_id }}</a> </p>
+        <p>Track Next: <a href="/track/{{ track.track_id }}{{ query_params }}">Next={{ track.track_id }}</a> </p>
     {% endif %}
-    <p>Go to first: <a href="/track/{{ first.track_id }}">here={{ first.track_id }}</a></p>
-    <p>Go to last: <a href="/track/{{ last.track_id }}">here={{ last.track_id }}</a></p>
+    <p>Go to first: <a href="/track/{{ first.track_id }}{{ query_params }}">here={{ first.track_id }}</a></p>
+    <p>Go to last: <a href="/track/{{ last.track_id }}{{ query_params }}">here={{ last.track_id }}</a></p>
     <p>Sort by album: <a href="/track/{{ track.track_id }}/sort_by_album"> click here </a></p>
     <p>Sort by track name: <a href="/track/{{ track.track_id }}/sort_by_track_name"> click here </a></p>
 
