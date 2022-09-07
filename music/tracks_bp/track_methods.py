@@ -32,6 +32,7 @@ class csvreader_track_methods_extension(TrackCSVReader):
         # sbt = sort by track etc. for the rest
         self.__tracks_sbt = self.sort_by_track_name(self.__tracks, False)
         self.__tracks_sba = self.sort_by_album_name(self.__tracks, False)
+        self.__tracks_sb_artist = self.sort_by_artist_name(self.__tracks, False)
 
     @property
     def tracks(self):
@@ -77,6 +78,11 @@ class csvreader_track_methods_extension(TrackCSVReader):
         if tracks_list is None:
             tracks_list = self.tracks
         return sorted(tracks_list, key=lambda i: i.album.title.upper() if i.album else '', reverse=sort_order_bool)
+
+    def sort_by_artist_name(self, tracks_list=None, sort_order_bool=True):
+        if tracks_list is None:
+            tracks_list = self.tracks
+        return sorted(tracks_list, key=lambda i: i.artist.full_name.upper() if i.album else '', reverse=sort_order_bool)
 
     def sort_by_track_id(self, tracks_list=None):
         if tracks_list is None:

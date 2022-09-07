@@ -1,12 +1,10 @@
 # home blueprint stuff
 from flask import Blueprint, render_template
-from flask import current_app
+from music.tracks_bp.tracks_bp import track_methods
 
-from music.domainmodel.track import Track
-from music.tracks_bp.track_methods import csvreader_track_methods_extension
 
 blueprint_home = Blueprint('home_page', __name__, template_folder='templates', static_folder='static')
-track_methods = csvreader_track_methods_extension()
+track_methods = track_methods
 
 
 @blueprint_home.route('/', methods=['GET'])
