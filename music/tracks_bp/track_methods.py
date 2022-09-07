@@ -46,6 +46,10 @@ class csvreader_track_methods_extension(TrackCSVReader):
     def tracks_t(self):
         return self.__tracks_sbt
 
+    @property
+    def tracks_artist(self):
+        return self.__tracks_sb_artist
+
     def find_track(self, tracks_list, track_id):
         if tracks_list is None:
             tracks_list = self.tracks
@@ -82,7 +86,7 @@ class csvreader_track_methods_extension(TrackCSVReader):
     def sort_by_artist_name(self, tracks_list=None, sort_order_bool=True):
         if tracks_list is None:
             tracks_list = self.tracks
-        return sorted(tracks_list, key=lambda i: i.artist.full_name.upper() if i.album else '', reverse=sort_order_bool)
+        return sorted(tracks_list, key=lambda i: i.artist.full_name.upper() if i.artist else '', reverse=sort_order_bool)
 
     def sort_by_track_id(self, tracks_list=None):
         if tracks_list is None:
@@ -135,7 +139,19 @@ class csvreader_track_methods_extension(TrackCSVReader):
 
             pass
         elif by_track_name == 2:
-            pass
+            bookmarks = dict()
+            for i in range(len(tracks_list)):
+                if tracks_list[i].artist:
+                    if tracks_list[i].artist.full_name is None and 'No name' not in bookmarks:
+                        bookmarks['No name'] = tracks_list[i].track_id
+                    else:
+                        if tracks_list[i].artist.full_name[0].upper() not in bookmarks:
+                            bookmarks[tracks_list[i].artist.full_name[0].upper()] = tracks_list[i].track_id
+                        else:
+                            pass
+                else:
+                    if 'No name' not in bookmarks:
+                        bookmarks['No name'] = tracks_list[i].track_id
         try:
             return bookmarks.items()
         except AttributeError:

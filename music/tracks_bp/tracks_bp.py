@@ -26,24 +26,22 @@ def display_track_at_id(track_id=None):
     list_from_query = tracks
     bookmarks = None
     if 'order' in args:
-        # print("ORDER____________________________________________________________", args, 'order' in args,
-        # args['order'])
-        if args['order'] in ['tracks', 'albums']:
+        if args['order'] in ['tracks', 'albums', 'artists']:
             query_params = '?order=' + args['order']
             if args['order'] == 'albums':
-                # list_from_query = tracks
                 list_from_query = track_methods.tracks_a
                 bookmarks = track_methods.create_bookmarks(list_from_query, 1)
 
             elif args['order'] == 'tracks':
-                # list_from_query = tracks
                 list_from_query = track_methods.tracks_t
                 bookmarks = track_methods.create_bookmarks(list_from_query, 0)
 
+            elif args['order'] == 'artists':
+                list_from_query = track_methods.tracks_artist
+                bookmarks = track_methods.create_bookmarks(list_from_query, 2)
+
     track_data = track_methods.find_track(list_from_query, track_id)
-    # print("track data:", track_data[0])
     np_url_id_tuple = track_methods.get_next_and_previous_track(list_from_query, track_data)
-    # print('NP_URL_TUPLE_________: ', np_url_id_tuple)
     return render_template('display_track.html', track=track_data[0], np_tuple=np_url_id_tuple,
                            first=track_methods.get_first_track(list_from_query),
                            last=track_methods.get_last_track(list_from_query),
@@ -52,11 +50,20 @@ def display_track_at_id(track_id=None):
 
 @blueprint_track.route('/track/<int:track_id>/sort_by_album', methods=['get'])
 def sort_by_album_button(track_id=None):
-    # track_methods.sort_by_album_name(None, False)
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=albums')
 
 
 @blueprint_track.route('/track/<int:track_id>/sort_by_track_name', methods=['get'])
 def sort_by_track_name_button(track_id=None):
-    # track_methods.sort_by_track_name(None, False)
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=tracks')
+
+
+@blueprint_track.route('/track/<int:track_id>/sort_by_artist_name', methods=['get'])
+def sort_by_artist_button(track_id=None):
+
+    for i in track_methods.tracks_artist:
+        try:
+            print(i.artist.full_name)
+        except:
+            pass
+    return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=artists')
