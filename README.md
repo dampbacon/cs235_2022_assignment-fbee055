@@ -24,9 +24,13 @@
 * user sessions flask stuff
 
 ## implemented
-* datatables table implented with ajax has sortable columns, search and pagination 
-* single track browser has sort by track name, album name and artist name. 
+* datatables table implented with ajax 
+  > * has sortable columns, search and pagination 
+* single track browser
+  > * has sort by track name, album name and artist name. 
   > * Buttons to be but currently just links are first, last, next, previous. 
   > * Bookmarks exist for each sorted order, for example: sorted by artist name, if you click 'A' it takes you to first artist with a. 
   > * Boomarks generated only for unique characters in string the which the sorted list is sorted by.
 * basic homepage
+  > * topbar links to single track browser, table and home
+  > * home is a splash screen with data stats
