@@ -60,10 +60,4 @@ def sort_by_track_name_button(track_id=None):
 
 @blueprint_track.route('/track/<int:track_id>/sort_by_artist_name', methods=['get'])
 def sort_by_artist_button(track_id=None):
-
-    for i in track_methods.tracks_artist:
-        try:
-            print(i.artist.full_name)
-        except:
-            pass
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=artists')
