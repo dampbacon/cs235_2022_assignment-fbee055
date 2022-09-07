@@ -7,7 +7,7 @@
 * error handling, redirect 404 errors to a template that extends base template
 
 ## todo b
-* make search at top bar functional and return results after searching album name, track name and artist name. Include a drop down to search choose where to search (all, track name, artist name, album name)
+* make search at top bar functional and return results after searching album name, track name and artist name. Include a drop down to search choose where to search (all, track name, artist name, album name). The returned result links takes you to single track view, unlike table search.
 * wtf-flask forms stuff
 * user repository class, holds users and interacts with requests such as login(gets user data) or register(add users)
 
