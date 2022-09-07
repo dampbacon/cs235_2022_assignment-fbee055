@@ -4,6 +4,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, g
 from flask import current_app
 from music.tracks_bp.track_methods import *
+from music.tracks_bp.track_table_methods import track_obj_to_dict
 
 blueprint_track = Blueprint('tracks_page', __name__, template_folder='templates', static_folder='static')
 
@@ -18,9 +19,6 @@ def display_track():
 
 @blueprint_track.route('/track/<int:track_id>', methods=['get'])
 def display_track_at_id(track_id=None):
-    # sort_by_track_name()
-    # works should be moved later
-    # sort_by_album_name()
     query_params = ''
     args = request.args
     list_from_query = tracks
@@ -66,3 +64,8 @@ def sort_by_artist_button(track_id=None):
 @blueprint_track.route('/track/list', methods=['get'])
 def data_tables_list():
     return render_template('tracks_datatables_list.html')
+
+
+@blueprint_track.route('/track/list/data', methods=['get'])
+def data_tables_list_data():
+    return {'data': [track_obj_to_dict(track_i) for track_i in track_methods.tracks]}
