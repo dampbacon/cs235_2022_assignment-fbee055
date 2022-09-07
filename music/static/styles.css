@@ -11,3 +11,8 @@ html,body{
     height: 100%;
 }
 
+.contain_table {
+  margin: 0 auto;
+  width: 80%;
+}
+
