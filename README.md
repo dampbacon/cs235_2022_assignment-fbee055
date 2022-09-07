@@ -3,7 +3,7 @@
 ![alt text](https://imgs.xkcd.com/comics/python.png)
 
 
-## todo c
+# todo C:
 * py test tests
 * nice html css everything
 * the collapsed top bar when screen small does nothing, needa fix
@@ -20,12 +20,22 @@
 + sortedlist['1235','Apples','Apples','apples','apples'] 
 ```
 
-## todo b
+# todo B:
 * make search at top bar functional and return results after searching album name, track name and artist name. Include a drop down to search choose where to search (all, track name, artist name, album name). The returned result links takes you to single track view, unlike table search.
 * wtf-flask forms stuff
-* user sessions flask stuff
 
-## implemented
+### graded:
+ > * search
+ > * Reviewing tracks
+ > * Registering, logging 
+in/logging out users
+ > * Use of authentication 
+techniques
+ > * Use of HTML forms / 
+WTForms
+
+# implemented:
+* blueprints
 * datatables table implented with ajax 
   > * has sortable columns, search and pagination 
 * single track browser
