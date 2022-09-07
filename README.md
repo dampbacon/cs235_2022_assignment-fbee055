@@ -1,5 +1,7 @@
 # COMPSCI 235 Assignment 2 plans and ideas
 
+![alt text](https://imgs.xkcd.com/comics/python.png)
+
 
 ## todo c
 * py test tests
