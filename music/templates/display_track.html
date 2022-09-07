@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'home.html' %}
+
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <title>Simple Track</title>
 </head>
 <body>
-    <h1>CompSci 235 2022 - MY MUSIC LIBRARY</h1>
     <h2>Track name: {{ track.title }}</h2>
     <p>Track id {{ track.track_id }}</p>
     <p>Track Duration: <b>{{ track.track_duration }}</b> seconds</p>
@@ -13,7 +13,9 @@
     {% if track.album.title!=None %}
         <p>Track album: {{ track.album.title }}</p>
     {% endif %}
-
+    {% if track.artist!=None %}
+        <p>Artist name: {{ track.artist.full_name }}</p>
+    {% endif %}
     {% if track!=first and track!=last%}
         <h1>middle elements</h1>
         <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}{{ query_params }}">Prev={{ np_tuple[0].track_id }}</a> </p>
@@ -45,4 +47,4 @@
     {% endif %}
 
 </body>
-</html>
+{% endblock %}
