@@ -1,24 +1,7 @@
-# todo make this an object with attributes containing varius sorted lists and convert the methods to sort to sorted
-#
+
 from music.domainmodel.track import Track
 from music.adapters.csvdatareader import TrackCSVReader
 from multipledispatch import dispatch
-
-
-#
-# INITIALIZE a csv reader object and make it read tracks. This is needed to find the tracks needed to display them
-#
-#
-#
-# test code
-# reader_obj = TrackCSVReader('tests/data/raw_albums_test.csv', 'tests/data/raw_tracks_test.csv')
-#
-# real deal code
-def create_some_track():
-    some_track = Track(1, "Heat Wavesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas")
-    some_track.track_duration = 250
-    some_track.track_url = 'https://spotify/track/1'
-    return some_track
 
 
 class csvreader_track_methods_extension(TrackCSVReader):

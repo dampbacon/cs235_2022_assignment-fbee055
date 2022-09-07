@@ -1,11 +1,8 @@
 {% extends 'home.html' %}
 
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Simple Track</title>
-</head>
-<body>
+
+<div>
     <h2>Track name: {{ track.title }}</h2>
     <p>Track id {{ track.track_id }}</p>
     <p>Track Duration: <b>{{ track.track_duration }}</b> seconds</p>
@@ -58,5 +55,5 @@
     {% endfor %}
     {% endif %}
 
-</body>
+</div>
 {% endblock %}

@@ -61,3 +61,8 @@ def sort_by_track_name_button(track_id=None):
 @blueprint_track.route('/track/<int:track_id>/sort_by_artist_name', methods=['get'])
 def sort_by_artist_button(track_id=None):
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=artists')
+
+
+@blueprint_track.route('/track/list', methods=['get'])
+def data_tables_list():
+    return render_template('tracks_datatables_list.html')
