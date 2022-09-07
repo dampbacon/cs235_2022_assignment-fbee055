@@ -9,7 +9,18 @@
     <h2>Track name: {{ track.title }}</h2>
     <p>Track id {{ track.track_id }}</p>
     <p>Track Duration: <b>{{ track.track_duration }}</b> seconds</p>
-    <p>Track URL: {{ track.track_url }}</p>
+    <p>Track URL: <a href="{{track.track_url}}">{{ track.track_url }}</a></p>
+    <p>Track Genres:
+    {% if genre_list %}
+        {% for i in genre_list %}
+            {% if i != genre_list[-1] %}
+            {{ i.name }},&nbsp;
+            {% else %}
+            {{ i.name }}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    </p>
     {% if track.album.title!=None %}
         <p>Track album: {{ track.album.title }}</p>
     {% endif %}
