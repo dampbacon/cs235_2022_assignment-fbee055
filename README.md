@@ -16,6 +16,8 @@
 
 - un_sortedlist['Apples','apples','Apples','apples','1235'] --> 
 ! sortedlist['1235','Apples','apples','Apples','apples'] 
+@@ when we want...... @@
++ sortedlist['1235','Apples','Apples','apples','apples'] 
 ```
 
 ## todo b
