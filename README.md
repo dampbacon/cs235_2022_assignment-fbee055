@@ -25,7 +25,9 @@
 * wtf-flask forms stuff
 
 ### graded:
- > * search
+ > * search/display based on tracks based on 
+artists, genres, album 
+etc.
  > * Reviewing tracks
  > * Registering, logging 
 in/logging out users
