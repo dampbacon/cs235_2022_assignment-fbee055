@@ -12,7 +12,9 @@ html,body{
 }
 
 .contain_table {
-  margin: 0 auto;
-  width: 70%;
+  /*margin: 0 auto;*/
+  /*width: 70%;*/
+  position: relative;
+  clear: both;
 }
 
