@@ -2,3 +2,12 @@
 .navbar_font {
     font-weight: 700;
 }
+html,body{
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.splash-body{
+    height: 100%;
+}
+
