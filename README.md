@@ -8,9 +8,11 @@
 * error handling, redirect 404 errors to a template that extends base template so that the website doesn't just end itself everytime there is an error
 * <h1>somewhat unnecasary:</h1>
 ```diff 
-+ implementing a tupple by modifying lambda function in the 
-+ track_methods sorting functions to give uppercase precedence as it currently sorts 
-+ by string.upper which will make it jumble tracks same names(a few in data set) example:  
+@@
+implementing a tupple by modifying lambda function in the 
+track_methods sorting functions to give uppercase precedence as it currently sorts 
+by string.upper which will make it jumble tracks same names(a few in data set) example: 
+@@
 - un_sortedlist['Apples','apples','Apples','apples','1235'] --> 
 ! sortedlist['1235','Apples','apples','Apples','apples'] 
 ```
