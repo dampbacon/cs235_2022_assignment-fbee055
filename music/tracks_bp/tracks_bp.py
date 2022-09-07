@@ -66,6 +66,6 @@ def data_tables_list():
     return render_template('tracks_datatables_list.html')
 
 
-@blueprint_track.route('/track/list/api/data')
+@blueprint_track.route('/track/list/api/data', methods=['get'])
 def data_tables_list_data():
     return {'data': [track_obj_to_dict(track_i) for track_i in track_methods.tracks]}
