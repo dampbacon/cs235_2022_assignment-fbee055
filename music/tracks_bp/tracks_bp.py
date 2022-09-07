@@ -13,10 +13,7 @@ tracks = track_methods.get_track_data()
 
 @blueprint_track.route('/track', methods=['GET'])
 def display_track():
-    a = tracks[2]
-    print(tracks)
-
-    return render_template('display_track.html', track=a)
+    return redirect(url_for('tracks_page.display_track_at_id', track_id=tracks[0].track_id))
 
 
 @blueprint_track.route('/track/<int:track_id>', methods=['get'])
@@ -29,7 +26,8 @@ def display_track_at_id(track_id=None):
     list_from_query = tracks
     bookmarks = None
     if 'order' in args:
-        print("ORDER____________________________________________________________", args, 'order' in args, args['order'])
+        # print("ORDER____________________________________________________________", args, 'order' in args,
+        # args['order'])
         if args['order'] in ['tracks', 'albums']:
             query_params = '?order=' + args['order']
             if args['order'] == 'albums':
@@ -43,9 +41,9 @@ def display_track_at_id(track_id=None):
                 bookmarks = track_methods.create_bookmarks(list_from_query, 0)
 
     track_data = track_methods.find_track(list_from_query, track_id)
-    print("track data:", track_data[0])
+    # print("track data:", track_data[0])
     np_url_id_tuple = track_methods.get_next_and_previous_track(list_from_query, track_data)
-    print('NP_URL_TUPLE_________: ', np_url_id_tuple)
+    # print('NP_URL_TUPLE_________: ', np_url_id_tuple)
     return render_template('display_track.html', track=track_data[0], np_tuple=np_url_id_tuple,
                            first=track_methods.get_first_track(list_from_query),
                            last=track_methods.get_last_track(list_from_query),
