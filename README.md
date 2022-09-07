@@ -4,6 +4,8 @@
 
 
 # todo C:
+* make single track browser first, last, next, prev links into buttons, use jinja to disable button(unclickable and faded out a bit) if on first or last track
+* use jinja and create css class tag to style top bar items color depending which url is active. for example on when on '/track/list' color the 'Browse tracks list' top bar item white
 * py test tests
 * nice html css everything
 * the collapsed top bar when screen small does nothing, needa fix
