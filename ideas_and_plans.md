@@ -12,6 +12,6 @@
 * user repository class, holds users and interacts with requests such as login(gets user data) or register(add users)
 
 ## implemented
-*datatables table
-*single track browser
-*basic homepage
+* datatables table
+* single track browser
+* basic homepage
