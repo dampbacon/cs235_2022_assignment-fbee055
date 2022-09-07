@@ -2,6 +2,7 @@
 
 
 ## todo c
+* py test tests
 * nice html css everything
 * the collapsed top bar when screen small does nothing, needa fix
 * error handling, redirect 404 errors to a template that extends base template so that the website doesn't just end itself everytime there is an error
