@@ -1,25 +1,17 @@
 # COMPSCI 235 Assignment 2 plans and ideas
 
 
-## Description
+## todo c
+* nice html css everything
+* the collapsed top bar when screen small does nothing, needa fix
+* error handling, redirect 404 errors to a template that extends base template
 
-
-## todo
-* 1
-* 2
-
-
-
+## todo b
+* make search at top bar functional and return results after searching album name, track name and artist name. Include a drop down to search choose where to search (all, track name, artist name, album name)
+* wtf-flask forms stuff
+* user repository class, holds users and interacts with requests such as login(gets user data) or register(add users)
 
 ## implemented
-
-
-## ideas
-* for each connection initiate a copy of the list from the reader, the current implementation has the
-following issue that any user sorting the data sorts the data for everyone. This can be solved by generating sorted copy
-lists by repurposing the sort functions converting .sort() to .sorted() and updating the relevant code.
-* implement the js api https://datatables.net/ for very clean beautiful searchable, pageable, sortable tables. 
-A great tutorial exists of using it with flask https://www.youtube.com/watch?v=IsuhCAptNbg
-
-<iframe width="640" height="480" src="https://www.youtube.com/watch?v=IsuhCAptNbg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-</iframe>
+*datatables table
+*single track browser
+*basic homepage
