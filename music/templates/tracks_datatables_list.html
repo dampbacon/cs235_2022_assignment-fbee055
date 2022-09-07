@@ -1,3 +1,38 @@
+{% extends 'home.html' %}
+{% block content %}
+    <table id="data" class="table table-dark" >
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>track</th>
+            <th>duration</th>
+            <th>url</th>
+            <th>album</th>
+            <th>artist</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+{% endblock %}
+
+
 {% block scripts %}
-    HMMMMMMMMMMMMMMMMMMMM
+    <script>
+        $(document).ready(function ()
+        {
+            $('#data').DataTable({
+                ajax: '/track/list/api/data',
+                columns: [
+                    {data:'track_id',orderable: false, searchable: false},
+                    {data:'track_name',orderable: false, searchable: false},
+                    {data:'duration',orderable: false, searchable: false},
+                    {data:'url',orderable: false, searchable: false},
+                    {data:'album',orderable: false, searchable: false},
+                    {data:'artist',orderable: false, searchable: false}
+                ]
+            })
+        }
+        )
+    </script>
 {% endblock %}
