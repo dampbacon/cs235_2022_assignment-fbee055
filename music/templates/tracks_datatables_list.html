@@ -27,7 +27,15 @@
                     {data:'track_id',orderable: false, searchable: false},
                     {data:'track_name'},
                     {data:'duration',orderable: false, searchable: false},
-                    {data:'url',orderable: false, searchable: false},
+
+                    //{data:'url',orderable: false, searchable: false},
+                    { data: "url",
+                    render: function (url) {
+                    return '<a href="'+url+'" target="_blank">link</a>';
+                    }, orderable: false, searchable: false},
+
+
+
                     {data:'album'},
                     {data:'artist'}
                 ]
