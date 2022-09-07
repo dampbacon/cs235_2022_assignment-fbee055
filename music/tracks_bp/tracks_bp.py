@@ -1,7 +1,7 @@
 # tracks and track displaying stuff
 # tracks and tracks displaying stuff
 # home blueprint stuff
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, g
 from flask import current_app
 from music.tracks_bp.track_methods import *
 

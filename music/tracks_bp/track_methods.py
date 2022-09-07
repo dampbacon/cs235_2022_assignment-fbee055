@@ -21,12 +21,13 @@ def create_some_track():
     return some_track
 
 
-class csvreader_track_methods_extension:
-    def __init__(self):
-        reader_obj = TrackCSVReader('tests/data/raw_albums_excerpt.csv', 'tests/data/raw_tracks_excerpt.csv')
+class csvreader_track_methods_extension(TrackCSVReader):
+    def __init__(self, albums_csv_file='tests/data/raw_albums_excerpt.csv',
+                 tracks_csv_file='tests/data/raw_tracks_excerpt.csv'):
+        super().__init__(albums_csv_file, tracks_csv_file)
 
-        reader_obj.read_csv_files()
-        self.__tracks = reader_obj.dataset_of_tracks
+        self.read_csv_files()
+        self.__tracks = self.dataset_of_tracks
 
         # sbt = sort by track etc. for the rest
         self.__tracks_sbt = self.sort_by_track_name(self.__tracks, False)
@@ -56,10 +57,10 @@ class csvreader_track_methods_extension:
             tracks_list = tracks_list
         temp_list = [0, 0]
         if current_track[0] == self.get_last_track(tracks_list):
-            print("WHAT IS WRONG. TRACK PREVIOUS", tracks_list[current_track[1] - 1])
+            # print("WHAT IS WRONG. TRACK PREVIOUS", tracks_list[current_track[1] - 1])
             temp_list[0] = tracks_list[current_track[1] - 1]
         elif current_track[0] == self.get_first_track(tracks_list):
-            print("WHAT IS WRONG. TRACK PREVIOUS", tracks_list[current_track[1] + 1])
+            # print("WHAT IS WRONG. TRACK PREVIOUS", tracks_list[current_track[1] + 1])
             temp_list[1] = tracks_list[current_track[1] + 1]
         elif current_track[0] != self.get_last_track(tracks_list) \
                 and current_track[0] != self.get_first_track(tracks_list):
