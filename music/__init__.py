@@ -7,6 +7,7 @@ from music.login_bp import login_bp
 
 def create_app():
     app = Flask(__name__)
+    app.debug = True
 
     with app.app_context():
         from .home import home
