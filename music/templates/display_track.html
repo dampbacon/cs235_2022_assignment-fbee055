@@ -3,36 +3,49 @@
 {% block content %}
 
 <div style="margin-top: 1em; text-align: center;">
+    <div style="margin-left: auto; margin-right: auto; width: 75%">
+        <div class="row no-gutters bg-light position-relative">
+            <div class="col-md-6 mb-md-0 p-md-4">
+                <img src="..." class="w-100" alt="...">
+            </div>
+            <div class="col-md-6 position-static p-4 pl-md-0">
+                <h2>Track Name: {{ track.title }}</h2>
+                <p>Track ID: {{ track.track_id }}</p>
+                <p>Track Duration: <b>{{ track.track_duration }}</b> seconds</p>
+                <p>Track URL: <a href="{{track.track_url}}">{{ track.track_url }}</a></p>
+                <p>Track Genres:
+                    {% if genre_list %}
+                    {% for i in genre_list %}
+                    {% if i != genre_list[-1] %}
+                    {{ i.name }},&nbsp;
+                    {% else %}
+                    {{ i.name }}
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </p>
+                {% if track.album.title!=None %}
+                <p>Track Album: {{ track.album.title }}</p>
+                {% endif %}
 
-    <h2>Track name: {{ track.title }}</h2>
-    <p>Track id {{ track.track_id }}</p>
-    <p>Track Duration: <b>{{ track.track_duration }}</b> seconds</p>
-    <p>Track URL: <a href="{{track.track_url}}">{{ track.track_url }}</a></p>
-    <p>Track Genres:
-        {% if genre_list %}
-        {% for i in genre_list %}
-        {% if i != genre_list[-1] %}
-        {{ i.name }},&nbsp;
-        {% else %}
-        {{ i.name }}
-        {% endif %}
-        {% endfor %}
-        {% endif %}
-    </p>
-    {% if track.album.title!=None %}
-    <p>Track album: {{ track.album.title }}</p>
-    {% endif %}
+                {% if track.artist!=None %}
+                <p>Artist Name: {{ track.artist.full_name }}</p>
+                {% endif %}
 
-    {% if track.artist!=None %}
-    <p>Artist name: {{ track.artist.full_name }}</p>
-    {% endif %}
-
-    {% if track!=first and track!=last%}
-    <h1>middle elements</h1>
-    <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}{{ query_params }}">Prev={{ np_tuple[0].track_id }}</a></p>
-    <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}{{ query_params }}">Next={{ np_tuple[1].track_id }}</a></p>
-
-    {% endif %}
+                {% if track!=first and track!=last%}
+                <h1>middle elements</h1>
+                <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}{{ query_params }}">Prev={{
+                    np_tuple[0].track_id }}</a></p>
+                <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}{{ query_params }}">Next={{
+                    np_tuple[1].track_id }}</a></p>
+                {% endif %}
+                <p>Another instance of placeholder content for this other custom component. It is intended to mimic what
+                    some real-world content would look like, and we're using it here to give the component a bit of body
+                    and
+                    size.</p>
+            </div>
+        </div>
+    </div>
 
     <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
         <ul class="pagination">
