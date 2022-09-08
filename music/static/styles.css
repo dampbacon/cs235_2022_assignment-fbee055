@@ -18,3 +18,18 @@ html,body{
   clear: both;
 }
 
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: none;
+  color: black!important;
+  border-radius: 4px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+  background: none;
+  color: black!important;
+}
+
+.paginate_button page-item {
+    color: black!important;
+}
+

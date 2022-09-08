@@ -1,6 +1,6 @@
 """Initialize Flask app."""
 
-from flask import Flask, render_template
+from flask import Flask
 
 from music.login_bp import login_bp
 

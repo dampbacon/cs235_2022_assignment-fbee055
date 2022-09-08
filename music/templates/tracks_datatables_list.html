@@ -1,26 +1,27 @@
 {% extends 'home.html' %}
 {% block content %}
-    <div class="contain_table table-responsive">
-    <table id="data" class="dataTable table table-dark table-hover" style="width: 100%;">
+<div style="margin-left: auto; margin-right: auto; width: 75%">
+    <br>
+    <table id="data" class="dataTable table table-light table-hover table-striped">
         <thead>
         <tr>
-            <th>id</th>
-            <th>track</th>
-            <th>duration</th>
-            <th>url</th>
-            <th>album</th>
-            <th>artist</th>
+            <th>Id</th>
+            <th>Track</th>
+            <th>Duration</th>
+            <th>Url</th>
+            <th>Album</th>
+            <th>Artist</th>
         </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
-    </div>
+</div>
 {% endblock %}
 
 
 {% block scripts %}
-    <script>
+<script>
         $(document).ready(function ()
         {
             $('#data').DataTable({
@@ -33,10 +34,8 @@
                     //{data:'url',orderable: false, searchable: false},
                     { data: "url",
                     render: function (url) {
-                    return '<a href="'+url+'" target="_blank">link</a>';
+                    return '<a href="'+url+'" target="_blank"><span class="badge bg-primary">Link <img style="margin-bottom: 4px;" src="../static/new_tab.png" width="10" height="10"/></span></a>';
                     }, orderable: false, searchable: false},
-
-
 
                     {data:'album'},
                     {data:'artist'}
@@ -44,5 +43,9 @@
             })
         }
         )
-    </script>
+
+
+
+
+</script>
 {% endblock %}
