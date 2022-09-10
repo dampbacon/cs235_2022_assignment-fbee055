@@ -2,10 +2,7 @@ import os
 import csv
 import ast
 
-from music.domainmodel.artist import Artist
-from music.domainmodel.album import Album
-from music.domainmodel.track import Track
-from music.domainmodel.genre import Genre
+from music.domainmodel.model import *
 
 
 def create_track_object(track_row):

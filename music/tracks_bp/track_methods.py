@@ -1,5 +1,5 @@
 
-from music.domainmodel.track import Track
+from music.domainmodel.model import *
 from music.adapters.csvdatareader import TrackCSVReader
 from multipledispatch import dispatch
 

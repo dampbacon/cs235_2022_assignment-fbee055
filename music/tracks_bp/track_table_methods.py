@@ -1,4 +1,4 @@
-from music.domainmodel.track import Track
+from music.domainmodel.model import *
 from music.tracks_bp.track_methods import csvreader_track_methods_extension
 
 
