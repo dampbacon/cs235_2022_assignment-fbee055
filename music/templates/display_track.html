@@ -2,18 +2,34 @@
 
 {% block content %}
 
-<div style="margin-top: 1em; text-align: center;">
-    <div style="margin-left: auto; margin-right: auto; width: 75%">
-        <div class="row no-gutters bg-light position-relative">
-            <div class="col-md-6 mb-md-0 p-md-4">
-                <img src="..." class="w-100" alt="...">
-            </div>
-            <div class="col-md-6 position-static p-4 pl-md-0">
-                <h2>Track Name: {{ track.title }}</h2>
-                <p>Track ID: {{ track.track_id }}</p>
-                <p>Track Duration: <b>{{ track.track_duration }}</b> seconds</p>
-                <p>Track URL: <a href="{{track.track_url}}">{{ track.track_url }}</a></p>
-                <p>Track Genres:
+<div style="margin-top: 1em; text-align: center; ">
+    <div style="display: flex; justify-content: space-evenly">
+        <div style="display: flex; align-items: center; justify-content: right;">
+            {% if track!=first %}
+            <a href="/track/{{ np_tuple[0].track_id }}{{ query_params }}">
+                <img src="../static/arrow.png" width="30" style="transform:rotate(180deg);">
+            </a>
+            {% endif %}
+        </div>
+        <div class="policy-container lead">
+            <div class="policy-table">
+                <div class="headings">
+                    <span class="heading">Track ID</span>
+                    <span class="heading">Track Title</span>
+                    <span class="heading">Artist</span>
+                    <span class="heading">Album</span>
+                    <span class="heading">Genres</span>
+                    <span class="heading">Duration (seconds)</span>
+                    <span class="heading">Track URL</span>
+                </div>
+
+                <div class="policy bg-light border rounded-2">
+                    <span>{{ track.track_id }}</span>
+                    <span>{{ track.title }}</span>
+                    <span>{{ track.artist.full_name }}</span>
+                    <span>{{ track.album.title }}</span>
+                    <span>{{ track.track_duration }}</span>
+                    <span>
                     {% if genre_list %}
                     {% for i in genre_list %}
                     {% if i != genre_list[-1] %}
@@ -23,81 +39,84 @@
                     {% endif %}
                     {% endfor %}
                     {% endif %}
-                </p>
-                {% if track.album.title!=None %}
-                <p>Track Album: {{ track.album.title }}</p>
-                {% endif %}
-
-                {% if track.artist!=None %}
-                <p>Artist Name: {{ track.artist.full_name }}</p>
-                {% endif %}
-
-                {% if track!=first and track!=last%}
-                <h1>middle elements</h1>
-                <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}{{ query_params }}">Prev={{
-                    np_tuple[0].track_id }}</a></p>
-                <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}{{ query_params }}">Next={{
-                    np_tuple[1].track_id }}</a></p>
-                {% endif %}
-                <p>Another instance of placeholder content for this other custom component. It is intended to mimic what
-                    some real-world content would look like, and we're using it here to give the component a bit of body
-                    and
-                    size.</p>
+                </span>
+                    <span>
+                        <a style="font-size: 1vw;" href="{{track.track_url}}" target=”_blank”>
+                            View
+                        </a>
+                    </span>
+                </div>
             </div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: right;">
+            {% if track!=last %}
+            <a href="/track/{{ np_tuple[1].track_id }}{{ query_params }}">
+                <img src="../static/arrow.png" width="30">
+            </a>
+            {% endif %}
+
+            <!--            {% if track==last %}-->
+            <!--            <a href="/track/{{ track.track_id }}{{ query_params }}">-->
+            <!--                <img src="../static/arrow.png" width="30">-->
+            <!--            </a>-->
+            <!--            {% endif %}-->
         </div>
     </div>
 
-    <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="First">
-                    <span class="sr-only">First</span>
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Prev</span>
-                </a>
-            </li>
-            <li class="page-item "><a class="page-link dropdown-toggle" href="#">Sort</a></a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Last">
-                    <span class="sr-only">Last</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <div style="display: flex; justify-content: space-evenly;">
+        <div class="navigationContainer">
+            <p class="lead">
+                Navigation
+            </p>
+            <nav style="display: flex; justify-content: center; margin: 1em;">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ first.track_id }}{{ query_params }}" aria-label="First">
+                            <span class="sr-only">First</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ track.track_id }}/sort_by_album" aria-label="First">
+                            <span class="sr-only">Sort by Album</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ track.track_id }}/sort_by_track_name" aria-label="First">
+                            <span class="sr-only">Sort by Track</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ track.track_id }}/sort_by_artist_name" aria-label="First">
+                            <span class="sr-only">Sort by Artist</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ last.track_id }}{{ query_params }}" aria-label="Last">
+                            <span class="sr-only">Last</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
+        {% if bookmarks %}
+        <div class="bookmarksContainer">
+            <p class="lead">
+                Bookmarks
+            </p>
+            {% for i in bookmarks %}
+            <a class="bookmarks" href="/track/{{ i[1] }}{{ query_params }}">
+                {{ i[0] }}
+            </a>
+            {% endfor %}
 
-    {% if track==first %}
-    <h1>first element</h1>
-    <p>Track Prev: <a href="/track/{{ track.track_id }}{{ query_params }}">Prev={{ track.track_id }}</a></p>
-    <p>Track Next: <a href="/track/{{ np_tuple[1].track_id }}{{ query_params }}">Next={{ np_tuple[1].track_id }}</a></p>
-    {% endif %}
+        </div>
+        {% endif %}
 
-    {% if track==last %}
-    <h1>Last element</h1>
-    <p>Track Prev: <a href="/track/{{ np_tuple[0].track_id }}{{ query_params }}">Prev={{ np_tuple[0].track_id }}</a></p>
-    <p>Track Next: <a href="/track/{{ track.track_id }}{{ query_params }}">Next={{ track.track_id }}</a></p>
-    {% endif %}
-    <p>Go to first: <a href="/track/{{ first.track_id }}{{ query_params }}">here={{ first.track_id }}</a></p>
-    <p>Go to last: <a href="/track/{{ last.track_id }}{{ query_params }}">here={{ last.track_id }}</a></p>
-    <p>Sort by album: <a href="/track/{{ track.track_id }}/sort_by_album"> click here </a></p>
-    <p>Sort by track name: <a href="/track/{{ track.track_id }}/sort_by_track_name"> click here </a></p>
-    <p>Sort by artist name: <a href="/track/{{ track.track_id }}/sort_by_artist_name"> click here </a></p>
+    </div>
 
-    {% if bookmarks %} <p><b><u>Bookmarks:</u></b></p>
-    {% for i in bookmarks %}
-    <a href="/track/{{ i[1] }}{{ query_params }}">{{ i[0] }}</a>
-    {% endfor %}
-    {% endif %}
 
 </div>
-{% endblock %}
+<br>
+{% endblock content %}

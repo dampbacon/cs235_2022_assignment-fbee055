@@ -33,3 +33,50 @@ html,body{
     color: black!important;
 }
 
+.policy-table {
+  color: grey;
+  text-align: center;
+}
+
+.headings, .policy {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+.heading {
+  flex-basis: 10%;
+}
+
+.policy {
+  border-radius: 2em;
+  background-color: white;
+  margin-bottom: 20px;
+  -moz-box-shadow: 0 0 3px grey;
+  -webkit-box-shadow: 0 0 3px grey;
+  box-shadow: 0 0 5px grey;
+}
+
+span {
+  flex-basis: 10%;
+}
+
+a, .page-link {
+  text-decoration: none;
+  color: #4c4c4c;
+}
+
+.policy-container {
+  display: flex;
+  justify-content: center;
+}
+
+.bookmarks {
+    font-size: 1.1em;
+}
+

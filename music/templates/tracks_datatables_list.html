@@ -6,8 +6,8 @@
         <thead>
         <tr>
             <th>Id</th>
-            <th>Artist</th>
             <th>Track Name</th>
+            <th>Artist</th>
             <th>Album</th>
             <th>Duration (secs)</th>
             <th>Url</th>
@@ -28,8 +28,8 @@
                 ajax: '/track/list/api/data',
                 columns: [
                     {data:'track_id', render: function (track_id) {return '<span class="badge bg-secondary">'+track_id+'</span>'},orderable: false, searchable: false},
-                    {data:'artist'},
                     {data:'track_name'},
+                    {data:'artist'},
                     {data:'album'},
                     {data:'duration',orderable: false, searchable: false},
                     {data: "url",
