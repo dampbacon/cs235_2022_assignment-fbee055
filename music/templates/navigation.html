@@ -20,15 +20,6 @@
 
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <!-- remember to make active link disabled using jinja via
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>-->
-
-                <!-- remember to make link active using jinja via
-                <li class="nav-item">
-                <a class="nav-link active"  href="/home">Home</a>
-                </li> -->
                 <li class="nav-item">
                     <a class="nav-link {{'active' if active_page == 'home' }}" href="/home">Home</a>
                 </li>
@@ -36,13 +27,25 @@
                     <a class="nav-link {{'active' if active_page == 'display_track' }}" href="/track">Browse tracks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{'active' if active_page == 'datatable' }}" href="/track/list">Browse tracks list</a>
+                    <a class="nav-link {{'active' if active_page == 'datatable' }}" href="/track/list">Browse tracks
+                        list</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{'active' if active_page == 'search' }}" href="/search">Search</a>
                 </li>
             </ul>
             <!--        <form role="search">-->
             <!--          <input class="form-control" type="search" placeholder="Search" >-->
             <!--        </form>-->
-            <button type="button" class="btn btn-sm btn-light">Login</button>
+
+            {% set isLoggedIn = False %}
+
+            {% if isLoggedIn%}
+            <button type="button" class="btn btn-sm btn-light me-2">Logout</button>
+            {% elif not isLoggedIn %}
+            <a class="btn btn-sm btn-light me-2" href="/authentication/login">Login</a>
+            {% endif %}
+            <a class="btn btn-sm btn-light me-2" href="/authentication/register">Register</a>
         </div>
     </div>
 </nav>
