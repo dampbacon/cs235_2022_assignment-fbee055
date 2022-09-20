@@ -24,25 +24,24 @@
                     <a class="nav-link {{'active' if active_page == 'home' }}" href="/home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{'active' if active_page == 'display_track' }}" href="/track">Browse tracks</a>
+                    <a class="nav-link {{'active' if active_page == 'display_track' }}" href="/track">Browse Tracks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{'active' if active_page == 'datatable' }}" href="/track/list">Browse tracks
-                        list</a>
+                    <a class="nav-link {{'active' if active_page == 'datatable' }}" href="/track/list">Browse Tracks List</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{'active' if active_page == 'search' }}" href="/search">Search</a>
                 </li>
             </ul>
-            <!--        <form role="search">-->
-            <!--          <input class="form-control" type="search" placeholder="Search" >-->
-            <!--        </form>-->
 
-            {% set isLoggedIn = False %}
+            <!-- {% set isLoggedIn = False %} -->
 
-            {% if isLoggedIn%}
-            <button type="button" class="btn btn-sm btn-light me-2">Logout</button>
-            {% elif not isLoggedIn %}
+            {% if 'user_name' in session %}
+            <h3 style="margin-right: 1em;">
+                <span class="badge bg-success">Logged in as {{ session['user_name'] }}</span>
+            </h3>
+            <a class="btn btn-sm btn-light me-2" href="/authentication/logout">Logout</a>
+            {% else %}
             <a class="btn btn-sm btn-light me-2" href="/authentication/login">Login</a>
             {% endif %}
             <a class="btn btn-sm btn-light me-2" href="/authentication/register">Register</a>

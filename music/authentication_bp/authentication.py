@@ -17,28 +17,64 @@ authentication_blueprint = Blueprint(
 @authentication_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
+    user_name_not_unique = None
+
+    if form.validate_on_submit():
+        user_name = form.user_name.data
+        password = form.password.data
+
+        try:
+            services.add_user(user_name, password, repo.repo_instance)
+            return redirect(url_for('authentication_bp.login'))
+        except services.NameNotUniqueException:
+            user_name_not_unique = 'User name not unique - please choose another name'
     return render_template(
         'credentials.html',
         title='Register',
-        form=form
+        form=form,
+        user_name_error_message=user_name_not_unique,
+        handler_url=url_for('authentication_bp.register')
     )
 
 
 @authentication_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    user_name_not_recognised = None
+    password_does_not_match_user_name = None
+
+    if form.validate_on_submit():
+
+        try:
+            user = services.get_user(form.user_name.data, repo.repo_instance)
+
+            # Authenticate User
+            services.authenticate_user(user['user_name'], form.password.data, repo.repo_instance)
+
+            # Initialise session and redirect to homepage
+            session.clear()
+            session['user_name'] = user['user_name']
+            session['isLoggedIn'] = True
+            return redirect(url_for('home_page.home'))
+
+        except services.UnknownUserException:
+            user_name_not_recognised = 'User name not recognised'
+        except services.AuthenticationException:
+            password_does_not_match_user_name = 'Password does not match user name'
+
     return render_template(
         'credentials.html',
         title='Login',
-        form=form
+        form=form,
+        user_name_error_message=user_name_not_recognised,
+        password_error_message=password_does_not_match_user_name
     )
 
 
 @authentication_blueprint.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('home_bp.home'))
-
+    return redirect(url_for('home_page.home'))
 
 def login_required(view):
     @wraps(view)
