@@ -37,6 +37,11 @@ def display_track_at_id(track_id=None):
             elif args['order'] == 'artists':
                 list_from_query = track_methods.tracks_artist
                 bookmarks = track_methods.create_bookmarks(list_from_query, 2)
+            
+            elif args['order'] == 'genres':
+                print("genre sorted!")
+                list_from_query = track_methods.tracks_genre
+                bookmarks = track_methods.create_bookmarks(list_from_query, 3)
 
     track_data = track_methods.find_track(list_from_query, track_id)
     np_url_id_tuple = track_methods.get_next_and_previous_track(list_from_query, track_data)
@@ -59,6 +64,10 @@ def sort_by_track_name_button(track_id=None):
 @blueprint_track.route('/track/<int:track_id>/sort_by_artist_name', methods=['get'])
 def sort_by_artist_button(track_id=None):
     return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=artists')
+
+@blueprint_track.route('/track/<int:track_id>/sort_by_genre', methods=['get'])
+def sort_by_genres(track_id=None):
+    return redirect(url_for('tracks_page.display_track_at_id', track_id=track_id) + '?order=genres')
 
 
 @blueprint_track.route('/track/list', methods=['get'])

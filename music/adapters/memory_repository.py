@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash
 
 from music.adapters.repository import AbstractRepository, RepositoryException
 from music.domainmodel.model import *
-
+from music.adapters.csvdatareader import TrackCSVReader
 
 class MemoryRepository(AbstractRepository):
 
@@ -21,6 +21,7 @@ class MemoryRepository(AbstractRepository):
         self.__users = list()
         self.__reviews = list()
         self.__playlists = list()
+        self.__genres = list()
 
     def add_user(self, user: User):
         self.__users.append(user)
@@ -57,14 +58,72 @@ class MemoryRepository(AbstractRepository):
             track = self.__tracks[-1]
         return track
 
+    ## Get genres
+    def get_genres(self) -> List[Genre]:
+        genres = list()
+        for track in self.__tracks:
+            for genre in track.genres:
+                if genre not in genres:
+                    genres.append(genre)
+        print("Genres = ", genres)
+        return genres
+    
+    def add_genre(self, genre: Genre):
+        self.__genres.append(genre)
+
+def read_csv_file(filename: str):
+    with open(filename) as infile:
+        reader = csv.reader(infile)
+
+        # Read first line of the the CSV file.
+        headers = next(reader)
+
+        # Read remaining rows from the CSV file.
+        for row in reader:
+            # Strip any leading/trailing white space from data read.
+            row = [item.strip() for item in row]
+            yield row
+
+def load_tracks(data_path: Path, repo: MemoryRepository):
+    genres = dict()
+
+    track_reader = TrackCSVReader(albums_csv_file='tests/data/raw_albums_excerpt.csv',
+                 tracks_csv_file='tests/data/raw_tracks_excerpt.csv')
+    print(track_reader.dataset_of_tracks)
+
+    
+    # for data_row in read_csv_file(track_filename):
+
+    #     article_key = int(data_row[0])
+    #     number_of_tags = len(data_row) - 6
+    #     article_tags = data_row[-number_of_tags:]
+
+    #     # Add any new tags; associate the current article with tags.
+    #     for tag in article_tags:
+    #         if tag not in genres.keys():
+    #             genres[tag] = list()
+    #         genres[tag].append(article_key)
+    #     del data_row[-number_of_tags:]
+
+    #     # Create Track object.
+    #     track = Track(
+    #         track_id=int(data_row[0]),
+    #         track_title=data_row[1],
+    #     )
+    #     repo.add_track(track)
+
+    # # Create Genre objects, associate them with Tracks and add them to the repository.
+    # for genre_name in genres.keys():
+    #     print(genres.keys)
+    #     for track_id in genres[genre_name]:
+    #         print(track_id)
+    #         genre = Genre(genre_name)
+    #         track = repo.get_track(track_id)
+    #         track.add_genre(genre)
+    #     repo.add_genre(genre)
 
 def populate(data_path: Path, repo: MemoryRepository):
-    print("populate!")
-    # Load articles and tags into the repository.
-    #load_articles_and_tags(data_path, repo)
+    print("populated!")
 
-    # Load users into the repository.
-    #users = load_users(data_path, repo)
-
-    # Load comments into the repository.
-    #load_comments(data_path, repo, users)
+    # Load music and tags into the repository
+    load_tracks(data_path, repo)

@@ -60,3 +60,8 @@ class AbstractRepository(abc.ABC):
         Returns None if the repository is empty.
         """
         raise NotImplementedError
+    
+    @abc.abstractmethod
+    def get_genres(self) -> List[Genre]:
+        """ Returns the list of genres in the repository. """
+        raise NotImplementedError
