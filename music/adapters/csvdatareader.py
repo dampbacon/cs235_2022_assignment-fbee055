@@ -2,10 +2,7 @@ import os
 import csv
 import ast
 
-from music.domainmodel.artist import Artist
-from music.domainmodel.album import Album
-from music.domainmodel.track import Track
-from music.domainmodel.genre import Genre
+from music.domainmodel.model import *
 
 
 def create_track_object(track_row):
@@ -51,7 +48,7 @@ def extract_genres(track_row: dict):
                     int(genre_dict['genre_id']), genre_dict['genre_title'])
                 genres.append(genre)
         except Exception as e:
-            print(track_genres_raw)
+            ##print(track_genres_raw)
             print(f'Exception occurred while parsing genres: {e}')
 
     return genres
@@ -166,3 +163,9 @@ class TrackCSVReader:
             self.__dataset_of_tracks.append(track)
 
         return self.__dataset_of_tracks
+
+    def get_track(self, track_id: int) -> Track:
+        for track in self.__dataset_of_tracks:
+            if track.track_id == track_id:
+                return track
+        return None

@@ -1,0 +1,50 @@
+{% set active_page = 'datatable' %}
+{% include 'navigation.html' %}
+{% block content %}
+
+<div style="margin-left: auto; margin-right: auto; width: 75%">
+    <br>
+    <table id="data" class="dataTable table table-light table-hover table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Track Name</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Duration (secs)</th>
+            <th>Url</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+        $(document).ready(function ()
+        {
+            $('#data').DataTable({
+                ajax: '/track/list/api/data',
+                columns: [
+                    {data:'track_id', render: function (track_id) {return '<span class="badge bg-secondary">'+track_id+'</span>'},orderable: false, searchable: false},
+                    {data:'track_name'},
+                    {data:'artist'},
+                    {data:'album'},
+                    {data:'duration',orderable: false, searchable: false},
+                    {data: "url",
+                    render: function (url) {
+                    return '<a href="'+url+'" target="_blank"><span class="badge bg-primary">Link <img style="margin-bottom: 4px;" src="../static/new_tab.png" width="10" height="10"/></span></a>';
+                    }, orderable: false, searchable: false},
+                ]
+            })
+        }
+        )
+
+
+
+
+</script>
+{% endblock %}

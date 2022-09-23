@@ -1,0 +1,128 @@
+{% set active_page = 'display_track' %}
+{% include 'navigation.html' %}
+
+{% block content %}
+
+<div style="margin-top: 1em; text-align: center; ">
+    <div style="display: flex; justify-content: space-evenly">
+        <div style="display: flex; align-items: center; justify-content: right;">
+            {% if track!=first %}
+            <a href="/track/{{ np_tuple[0].track_id }}{{ query_params }}">
+                <img src="../static/arrow.png" width="30" style="transform:rotate(180deg);">
+            </a>
+            {% endif %}
+        </div>
+        <div class="policy-container lead">
+            <div class="policy-table">
+                <div class="headings">
+                    <span class="heading">Track ID</span>
+                    <span class="heading">Track Title</span>
+                    <span class="heading">Artist</span>
+                    <span class="heading">Album</span>
+                    <span class="heading">Duration (seconds)</span>
+                    <span class="heading">Genres</span>
+                    <span class="heading">Track URL</span>
+                </div>
+
+                <div class="policy bg-light border rounded-2">
+                    <span>{{ track.track_id }}</span>
+                    <span>{{ track.title }}</span>
+                    <span>{{ track.artist.full_name }}</span>
+                    <span>{{ track.album.title }}</span>
+                    <span>{{ track.track_duration }}</span>
+                    <span>
+                    {% if genre_list %}
+                    {% for i in genre_list %}
+                    {% if i != genre_list[-1] %}
+                    {{ i.name }},&nbsp;
+                    {% else %}
+                    {{ i.name }}
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </span>
+                    <span>
+                        <a style="font-size: 1vw;" href="{{track.track_url}}" target=”_blank”>
+                            View
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: right;">
+            {% if track!=last %}
+            <a href="/track/{{ np_tuple[1].track_id }}{{ query_params }}">
+                <img src="../static/arrow.png" width="30">
+            </a>
+            {% endif %}
+
+            <!--            {% if track==last %}-->
+            <!--            <a href="/track/{{ track.track_id }}{{ query_params }}">-->
+            <!--                <img src="../static/arrow.png" width="30">-->
+            <!--            </a>-->
+            <!--            {% endif %}-->
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-evenly;">
+        <div class="navigationContainer">
+            <p class="lead">
+                Navigation
+            </p>
+            <nav style="display: flex; justify-content: center; margin: 1em;">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ first.track_id }}{{ query_params }}" aria-label="First">
+                            <span class="sr-only">First</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ track.track_id }}/sort_by_album" aria-label="First">
+                            <span class="sr-only">Sort by Album</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ track.track_id }}/sort_by_track_name" aria-label="First">
+                            <span class="sr-only">Sort by Track</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ track.track_id }}/sort_by_artist_name" aria-label="First">
+                            <span class="sr-only">Sort by Artist</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ track.track_id }}/sort_by_genre" aria-label="First">
+                            <span class="sr-only">Sort by Genre</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="/track/{{ last.track_id }}{{ query_params }}" aria-label="Last">
+                            <span class="sr-only">Last</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="btn-general" onclick="location.href='{{ home }}'">Comment</button>
+        </div>
+
+        {% if bookmarks %}
+        <div class="bookmarksContainer">
+            <p class="lead">
+                Bookmarks
+            </p>
+            {% for i in bookmarks %}
+            <a class="bookmarks" href="/track/{{ i[1] }}{{ query_params }}">
+                {{ i[0] }}
+            </a>
+            {% endfor %}
+
+        </div>
+        {% endif %}
+
+    </div>
+
+
+</div>
+<br>
+{% endblock content %}

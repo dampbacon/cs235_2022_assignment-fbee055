@@ -1,14 +1,25 @@
 import pytest
 import os
 
-from music.domainmodel.artist import Artist
-from music.domainmodel.track import Track
-from music.domainmodel.genre import Genre
-from music.domainmodel.review import Review
-from music.domainmodel.album import Album
-from music.domainmodel.user import User
+from music.domainmodel.model import *
 from music.adapters.csvdatareader import TrackCSVReader
 
+
+@pytest.fixture()
+def track():
+    return Track(1, 'Food', 1, 1, 1, 2006, 168)
+
+@pytest.fixture()
+def album():
+    return Album(1, 'AWOL - A Way Of Life', 1, 2006)
+
+@pytest.fixture()
+def artist():
+    return Artist(1, 'AWOL')
+
+@pytest.fixture()
+def genre():
+    return Genre(1, 'Hip-Hop')
 
 class TestArtist:
 
@@ -726,7 +737,6 @@ class TestCSVReader:
         artists_set = reader.dataset_of_artists
         sorted_artists = sorted(artists_set)
 
-        # Test there are total 5 unique artists in the test dataset.
         assert len(sorted_artists) == 263
 
         sorted_artists_sample = str(sorted_artists[:3])
@@ -735,13 +745,47 @@ class TestCSVReader:
     def test_genres_dataset(self):
         reader = create_csv_reader()
         genres_set = reader.dataset_of_genres
-
         sorted_genres = sorted(genres_set)
-
-        # Test there are total 7 unique genres in the test dataset.
         assert len(sorted_genres) == 60
 
-        # Expected output: '[<Genre Avant-Garde, genre id = 1>, <Genre International, genre id = 2>, <Genre Blues,
-        # genre id = 3>]'
-        sorted_genre_sample = str(sorted_genres[:3])
-        assert sorted_genre_sample == '[<Genre Avant-Garde, genre id = 1>, <Genre International, genre id = 2>, <Genre Blues, genre id = 3>]'
+        sorted_genres_sample = str(sorted_genres[:3])
+        print(sorted_genres_sample)
+        assert sorted_genres_sample == '[<Genre Avant-Garde, genre id = 1>, <Genre International, genre id = 2>, <Genre Blues, genre id = 3>]'
+
+
+
+def test_create_csv_reader():
+    reader = create_csv_reader()
+    assert reader is not None
+
+def test_create_track():
+    track = Track(1, 'Shivers')
+    assert track is not None
+
+def test_create_album():
+    album = Album(1, 'Shivers')
+    assert album is not None
+
+def test_create_artist():
+    artist = Artist(1, 'Shivers')
+    assert artist is not None
+
+def test_create_genre():
+    genre = Genre(1, 'Shivers')
+    assert genre is not None
+
+def test_create_review():
+    track = Track(1, 'Shivers')
+    review = Review(track, 'review', 5)
+    assert review is not None
+
+def test_create_user():
+    user = User(1, 'Shivers', 'password')
+    assert user is not None
+
+def test_create_review():
+    track = Track(1, 'Shivers')
+    review = Review(track, 'review', 5)
+    assert review is not None
+
+
