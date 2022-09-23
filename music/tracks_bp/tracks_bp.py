@@ -3,13 +3,13 @@
 # home blueprint stuff
 from flask import Blueprint, render_template, redirect, url_for, request, g
 from flask import current_app
-from music.tracks_bp.track_methods import *
 from music.tracks_bp.track_table_methods import track_obj_to_dict
+import music.adapters.repository as repo
 
 blueprint_track = Blueprint('tracks_page', __name__, template_folder='templates', static_folder='static')
 
-track_methods = csvreader_track_methods_extension()
-tracks = track_methods.get_track_data()
+track_methods = repo.repo_instance
+tracks = track_methods.tracks
 
 
 @blueprint_track.route('/track', methods=['GET'])
