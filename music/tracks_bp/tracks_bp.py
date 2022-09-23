@@ -14,7 +14,7 @@ tracks = track_methods.get_track_data()
 
 @blueprint_track.route('/track', methods=['GET'])
 def display_track():
-    return redirect(url_for('tracks_page.display_track_at_id', track_id=tracks[0].track_id))
+    return redirect(url_for('tracks_page.display_track_at_id', track_id=tracks[0].track_id) + '?order=tracks')
 
 
 @blueprint_track.route('/track/<int:track_id>', methods=['get'])
