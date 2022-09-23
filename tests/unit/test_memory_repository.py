@@ -116,8 +116,10 @@ def test_album_can_be_compared():
     assert album1 != album2
     assert album1 == album3
 
-
-
-
-
-
+# artist tests
+def test_artist_can_be_compared():
+    artist1 = Artist(1, "Test Artist")
+    artist2 = Artist(2, "Test Artist")
+    artist3 = Artist(1, "Test Artist")
+    assert artist1 != artist2
+    assert artist1 == artist3
