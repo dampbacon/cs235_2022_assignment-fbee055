@@ -40,6 +40,9 @@ class MemoryRepository(AbstractRepository):
     def get_user(self, user_name) -> User:
         return next((user for user in self.__users if user.user_name == user_name), None)
 
+    def get_number_of_users(self) -> int:
+        return len(self.__users)
+
     def csv_reader_read(self):
         self.__csv_reader.read_csv_files()
 
@@ -97,6 +100,12 @@ class MemoryRepository(AbstractRepository):
         for i in tracks_list:
             if i.track_id == id:
                 return i
+    
+    def get_tracks_by_id(self, id_list):
+        tracks = list()
+        for i in id_list:
+            tracks.append(self.get_track(i))
+        return tracks
 
     def find_track(self, tracks_list, track_id):
         if tracks_list is None:
@@ -126,10 +135,19 @@ class MemoryRepository(AbstractRepository):
 
     ## Get genres
     def get_genres(self) -> set[Genre]:
-        return self.genres
+        return self.__genres
+    
+    def get_genre(self, genre_name: str) -> Genre:
+        return next((genre for genre in self.__genres if genre.name == genre_name), None)
 
     def add_genre(self, genre: Genre):
         self.__genres.add(genre)
+    
+    def get_number_of_genres(self) -> int:
+        return len(self.__genres)
+    
+    def get_album(self, album_id: int) -> Album:
+        return next((album for album in self.__albums if album.album_id == album_id), None)
 
     def sort_by_track_name(self, tracks_list, sort_order_bool=True):
         # temp code
@@ -141,6 +159,10 @@ class MemoryRepository(AbstractRepository):
         if tracks_list is None:
             tracks_list = self.tracks
         return sorted(tracks_list, key=lambda i: i.album.title.upper() if i.album else '', reverse=sort_order_bool)
+
+    def add_track_to_album(self, track: Track, album: Album):
+        album.add_track(track)
+        self.add_track(track)
 
     def sort_by_artist_name(self, tracks_list=None, sort_order_bool=True):
         if tracks_list is None:
@@ -243,10 +265,6 @@ def load_tracks(data_path: Path, repo: MemoryRepository):
     repo.csv_reader_new_files('tests/data/raw_albums_excerpt.csv',
                               'tests/data/raw_tracks_excerpt.csv')
 
-    # print(repo.tracks)
-    print("TEST")
-
-
     # track_reader = TrackCSVReader(albums_csv_file='tests/data/raw_albums_excerpt.csv',
     #                               tracks_csv_file='tests/data/raw_tracks_excerpt.csv')
 
@@ -286,8 +304,3 @@ def populate(data_path: Path, repo: MemoryRepository):
     print("populated!")
     # Load music and tags into the repository
     load_tracks(data_path, repo)
-
-
-from music.domainmodel.model import *
-from music.adapters.csvdatareader import TrackCSVReader
-from multipledispatch import dispatch

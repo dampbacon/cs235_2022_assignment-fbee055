@@ -48,7 +48,7 @@ def extract_genres(track_row: dict):
                     int(genre_dict['genre_id']), genre_dict['genre_title'])
                 genres.append(genre)
         except Exception as e:
-            print(track_genres_raw)
+            ##print(track_genres_raw)
             print(f'Exception occurred while parsing genres: {e}')
 
     return genres
@@ -163,3 +163,9 @@ class TrackCSVReader:
             self.__dataset_of_tracks.append(track)
 
         return self.__dataset_of_tracks
+
+    def get_track(self, track_id: int) -> Track:
+        for track in self.__dataset_of_tracks:
+            if track.track_id == track_id:
+                return track
+        return None
