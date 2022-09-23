@@ -18,6 +18,11 @@ class csvreader_track_methods_extension(TrackCSVReader):
         self.__tracks_sb_artist = self.sort_by_artist_name(self.__tracks, False)
         self.__tracks_genre = self.sort_by_genre(self.__tracks, False)
 
+    def refresh_lists(self):
+        self.__tracks_sba=self.sort_by_album_name(self.tracks)
+        self.__tracks_sbt=self.sort_by_track_name(self.tracks)
+        self.__tracks_sb_artist=self.sort_by_artist_name(self.tracks)
+        self.__tracks_genre=self.sort_by_genre(self.tracks)
     @property
     def tracks(self):
         return self.__tracks
@@ -145,3 +150,4 @@ class csvreader_track_methods_extension(TrackCSVReader):
             return bookmarks.items()
         except AttributeError:
             return None
+
