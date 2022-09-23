@@ -16,18 +16,19 @@ from music.adapters.csvdatareader import TrackCSVReader
 class MemoryRepository(AbstractRepository):
 
     def __init__(self):
-        self.__albums = list()
-        self.__artists = list()
-
         self.__users = list()
         self.__reviews = list()
         self.__playlists = list()
+
+        # default
         self.__csv_reader = TrackCSVReader(albums_csv_file='tests/data/raw_albums_excerpt.csv',
                                            tracks_csv_file='tests/data/raw_tracks_excerpt.csv')
+
         self.__csv_reader.read_csv_files()
+        self.__albums = self.__csv_reader.dataset_of_albums
+        self.__artists = self.__csv_reader.dataset_of_artists
         self.__genres = self.__csv_reader.dataset_of_genres
-        self.__tracks_index = dict()
-        self.__tracks = list(self.__csv_reader.dataset_of_tracks)
+        self.__tracks = self.__csv_reader.dataset_of_tracks
         self.__tracks_sbt = self.sort_by_track_name(self.__tracks, False)
         self.__tracks_sba = self.sort_by_album_name(self.__tracks, False)
         self.__tracks_sb_artist = self.sort_by_artist_name(self.__tracks, False)
@@ -39,6 +40,19 @@ class MemoryRepository(AbstractRepository):
     def get_user(self, user_name) -> User:
         return next((user for user in self.__users if user.user_name == user_name), None)
 
+    def csv_reader_read(self):
+        self.__csv_reader.read_csv_files()
+
+    def csv_reader_new_files(self, albums: str, tracks: str):
+        self.__csv_reader = None
+        self.__csv_reader = TrackCSVReader(albums, tracks)
+        self.csv_reader_read()
+        self.__genres = self.__csv_reader.dataset_of_genres
+        self.__tracks = self.__csv_reader.dataset_of_tracks
+        self.__artists = self.__csv_reader.dataset_of_artists
+        self.__albums = self.__csv_reader.dataset_of_albums
+        self.refresh_lists()
+
     @property
     def genres(self):
         return self.__genres
@@ -46,6 +60,15 @@ class MemoryRepository(AbstractRepository):
     @property
     def tracks(self):
         return self.__tracks
+
+    @property
+    def artists(self):
+        return self.__artists
+
+    @property
+    def albums(self):
+        return self.__albums
+
 
     @property
     def tracks_a(self):
@@ -68,7 +91,6 @@ class MemoryRepository(AbstractRepository):
     def add_track(self, track: Track):
         insort_left(self.__tracks, track)
         self.refresh_lists()
-        self.__tracks_index[track.track_id] = track
 
     def get_track(self, id: int) -> Track:
         tracks_list = self.tracks
@@ -215,13 +237,20 @@ class MemoryRepository(AbstractRepository):
 #             yield row
 
 # todo idk why this exists also genres albums and other stuff are properties of the reader
-# def load_tracks(data_path: Path, repo: MemoryRepository):
-#     genres = dict()
-#
-#     track_reader = TrackCSVReader(albums_csv_file='tests/data/raw_albums_excerpt.csv',
-#                                   tracks_csv_file='tests/data/raw_tracks_excerpt.csv')
-#     print(track_reader.dataset_of_tracks)
-#
+def load_tracks(data_path: Path, repo: MemoryRepository):
+    genres = dict()
+
+    repo.csv_reader_new_files('tests/data/raw_albums_excerpt.csv',
+                              'tests/data/raw_tracks_excerpt.csv')
+
+    print(repo.tracks)
+    print("TEST")
+
+
+    # track_reader = TrackCSVReader(albums_csv_file='tests/data/raw_albums_excerpt.csv',
+    #                               tracks_csv_file='tests/data/raw_tracks_excerpt.csv')
+
+
 #     # for data_row in read_csv_file(track_filename):
 #
 #     #     article_key = int(data_row[0])
@@ -255,9 +284,8 @@ class MemoryRepository(AbstractRepository):
 
 def populate(data_path: Path, repo: MemoryRepository):
     print("populated!")
-
     # Load music and tags into the repository
-    # load_tracks(data_path, repo)
+    load_tracks(data_path, repo)
 
 
 from music.domainmodel.model import *

@@ -1,7 +1,6 @@
 # home blueprint stuff
 from flask import Blueprint, render_template
 import music.utilities.utilities as utilities
-import music.tracks_bp.track_methods as track_methods
 
 blueprint_search = Blueprint('search_page', __name__, template_folder='templates', static_folder='static')
 
