@@ -9,7 +9,7 @@ from music.tracks_bp.track_table_methods import track_obj_to_dict
 blueprint_track = Blueprint('tracks_page', __name__, template_folder='templates', static_folder='static')
 
 track_methods = csvreader_track_methods_extension()
-tracks = track_methods.get_track_data()
+tracks = track_methods.tracks
 
 
 @blueprint_track.route('/track', methods=['GET'])
