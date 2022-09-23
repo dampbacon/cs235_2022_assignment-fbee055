@@ -7,7 +7,7 @@ from music.domainmodel import *
 
 def get_genre_names(repo: AbstractRepository):
     genres = repo.get_genres()
-    genre_names = [genre.genre_name for genre in genres]
+    genre_names = [genre.name for genre in genres]
     print("Genres Names = ", genre_names)
     return genre_names
 

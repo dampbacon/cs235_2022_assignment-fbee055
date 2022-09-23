@@ -243,7 +243,7 @@ def load_tracks(data_path: Path, repo: MemoryRepository):
     repo.csv_reader_new_files('tests/data/raw_albums_excerpt.csv',
                               'tests/data/raw_tracks_excerpt.csv')
 
-    print(repo.tracks)
+    # print(repo.tracks)
     print("TEST")
 
 
