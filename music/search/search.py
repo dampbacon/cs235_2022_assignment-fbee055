@@ -7,4 +7,4 @@ blueprint_search = Blueprint('search_page', __name__, template_folder='templates
 
 @blueprint_search.route('/search', methods=['GET'])
 def search():
-    return render_template('search.html', genre_urls=utilities.get_genres_and_urls())
+    return render_template('search.html')
