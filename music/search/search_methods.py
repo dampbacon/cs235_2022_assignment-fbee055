@@ -123,4 +123,24 @@ def search_by_artist_name(repository=repo, string_to_search='free', shallow_sear
     return results_with_search_term_at_front, result_with_search_term_in_middle_or_end
 
 
+def search_by_genre_name(repository=repo, string_to_search='free'):
+    genre_set=repository.genres
+    tracks_list=repository.tracks
+    results=[]
+    toggle=False
+    for i in genre_set:
+        if string_to_search.upper() in i.name.upper():
+            toggle=True
+    if toggle is False:
+        return None
+    for i in tracks_list:
+        if i.genres:
+            for x in i.genres:
+                if string_to_search.upper() in x.name.upper():
+                    if i not in results:
+                        results.append(i)
+                    print(x.name)
+
+    return results
+
 

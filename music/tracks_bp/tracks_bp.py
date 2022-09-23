@@ -15,7 +15,8 @@ from functools import wraps
 from music.authentication_bp.authentication import login_required
 import music.tracks_bp.track_table_methods as track_table
 # test search code
-from music.search.search_methods import search_by_album_name, search_by_track_name, search_by_artist_name
+from music.search.search_methods import search_by_album_name, search_by_track_name, search_by_artist_name, \
+    search_by_genre_name
 
 blueprint_track = Blueprint('tracks_page', __name__, template_folder='templates', static_folder='static')
 
@@ -54,7 +55,7 @@ def display_track_at_id(track_id=None):
                 list_from_query = track_methods.tracks_genre
                 bookmarks = track_methods.create_bookmarks(list_from_query, 3)
     print(bookmarks)
-    print(search_by_artist_name(track_methods,'a'))
+    print(search_by_genre_name(track_methods,'rock'))
     track_data = track_methods.find_track(list_from_query, track_id)
     np_url_id_tuple = track_methods.get_next_and_previous_track(list_from_query, track_data)
     return render_template('display_track.html', track=track_data[0], np_tuple=np_url_id_tuple,
