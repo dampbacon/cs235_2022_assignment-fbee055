@@ -83,10 +83,10 @@ class MemoryRepository(AbstractRepository):
         return self.__tracks_sb_artist
 
     def refresh_lists(self):
-        self.__tracks_sba = self.sort_by_album_name(self.tracks)
-        self.__tracks_sbt = self.sort_by_track_name(self.tracks)
-        self.__tracks_sb_artist = self.sort_by_artist_name(self.tracks)
-        self.__tracks_genre = self.sort_by_genre(self.tracks)
+        self.__tracks_sba = self.sort_by_album_name(self.tracks,False)
+        self.__tracks_sbt = self.sort_by_track_name(self.tracks,False)
+        self.__tracks_sb_artist = self.sort_by_artist_name(self.tracks,False)
+        self.__tracks_genre = self.sort_by_genre(self.tracks,False)
 
     def add_track(self, track: Track):
         insort_left(self.__tracks, track)
