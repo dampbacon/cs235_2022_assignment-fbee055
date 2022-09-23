@@ -1,6 +1,5 @@
-# COMPSCI 235 Starter Repository for Assignment 2
-This is a starter repository for the assignment 2 of CompSci 235 in Semester 2, 2022.
-
+# COMPSCI 235 Repository for Assignment 2
+# Matthew Young and Francis Beetge
 
 ## Description
 
@@ -37,8 +36,14 @@ $ flask run
 
 After you have configured pytest as the testing tool for PyCharm (File - Settings - Tools - Python Integrated Tools - Testing), you can then run tests from within PyCharm by right clicking the tests folder and selecting "Run pytest in tests".
 
-Alternatively, from a terminal in the root folder of the project, you can also call 'python -m pytest tests' to run all the tests. PyCharm also provides a built-in terminal, which uses the configured virtual environment. 
+Alternatively, from a terminal in the root folder of the project, you can also call 'python -m pytest tests' to run all the tests. PyCharm also provides a built-in terminal, which uses the configured virtual environment.
 
+Run all tests by typing ‘python –m pytest –v tests’, from within the virtual environment in a
+terminal window
+
+````shell
+$ python –m pytest –v tests
+```` 
  
 ## Data sources
 
